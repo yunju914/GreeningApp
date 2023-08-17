@@ -93,16 +93,6 @@
             android:layout_marginBottom="15dp"
             android:focusableInTouchMode="false"/>
 
-<!--        <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:textAlignment="viewStart"-->
-<!--            android:textSize="18dp"-->
-<!--            android:textStyle="bold"-->
-<!--            android:text="비밀번호" />-->
-
-<!--        ㅗ-->
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -116,7 +106,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPostalAddress"
-            android:layout_marginBottom="15dp" />
+            android:layout_marginBottom="15dp"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -133,8 +123,34 @@
             android:inputType="text"
             android:layout_marginBottom="15dp" />
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="비밀번호 재설정은 여기를 클릭하세요"
+                android:textAlignment="viewStart"
+                android:textSize="16dp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnPassword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/sub5"
+                android:backgroundTint="@color/sub5"
+                android:onClick="setUpdatePasswordBtn"
+                android:text="비밀번호 재설정"
+                android:textColor="#000000"
+                app:icon="@drawable/baseline_lock_24" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -145,10 +161,10 @@
             android:id="@+id/save_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/main_color"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="10dp"
+            android:background="@color/main_color"
             android:text="저장하기" />
 
     </LinearLayout>

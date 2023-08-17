@@ -84,14 +84,8 @@ public class MyPageActivity extends AppCompatActivity implements View.OnClickLis
         ImageButton ChangeBtn = findViewById(R.id.change_move);
         ChangeBtn.setOnClickListener(this);
 
-        ImageButton passwordChangeBtn = findViewById(R.id.pwcg_move);
-        passwordChangeBtn.setOnClickListener(this);
-
         ImageButton orderBtn = findViewById(R.id.jmny_move);
         orderBtn.setOnClickListener(this);
-
-        ImageButton termsBtn = findViewById(R.id.use_move);
-        termsBtn.setOnClickListener(this);
 
         ImageButton withdrawalBtn = findViewById(R.id.tt_move);
         withdrawalBtn.setOnClickListener(this);
@@ -111,8 +105,6 @@ public class MyPageActivity extends AppCompatActivity implements View.OnClickLis
 
         int id = v.getId();
 
-
-
         //씨드 X
         if (id == R.id.pn_move) {
 //            intent = new Intent(MyPageActivity.this, PointHistoryActivity.class);
@@ -128,9 +120,6 @@ public class MyPageActivity extends AppCompatActivity implements View.OnClickLis
         } else if (id == R.id.change_move) {
             intent = new Intent(MyPageActivity.this, ChangeActivity.class);
             startActivity(intent);
-        } else if (id == R.id.pwcg_move) {
-//            intent = new Intent(MyPageActivity.this, PwdChangeActivity.class);
-//            startActivity(intent);
         } else if (id == R.id.jmny_move) {
             intent = new Intent(MyPageActivity.this, ReviewWriteActivity.class);
             startActivity(intent);
@@ -138,9 +127,6 @@ public class MyPageActivity extends AppCompatActivity implements View.OnClickLis
             intent = new Intent(MyPageActivity.this, WithdrawalActivity.class);
             startActivity(intent);
             //이용 약관 보류
-        } else if (id == R.id.use_move) {
-//            intent = new Intent(MyPageActivity.this, TermsOfUseActivity.class);
-//            startActivity(intent);
         }
     }
 

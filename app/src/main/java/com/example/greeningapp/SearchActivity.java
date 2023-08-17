@@ -94,8 +94,12 @@ public class SearchActivity extends AppCompatActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_cart) {
+        int itemId = item.getItemId();
+        if (itemId == android.R.id.home) { //뒤로가기
+            onBackPressed();
+            return true;
+        }
+        else if (itemId == R.id.action_cart) {
             Intent intent = new Intent(SearchActivity.this, MyPageActivity.class);
             startActivity(intent);
             return true;
@@ -112,6 +116,7 @@ public class SearchActivity extends AppCompatActivity {
         adapter.startListening();
         recview.setAdapter(adapter);
     }
+
 }
 
 
