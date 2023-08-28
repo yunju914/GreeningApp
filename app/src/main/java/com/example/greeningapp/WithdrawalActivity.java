@@ -16,17 +16,15 @@ import androidx.annotation.NonNull;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class WithdrawalActivity extends Activity {
 
     private FirebaseAuth mFirebaseAuth; // 파이어베이스 인증 처리
     private DatabaseReference mDatabaseRef; // 실시간 데이터베이스
-    private ImageButton backButton;
-    private RadioButton radioButton;
-    private Button cancelButton, withdrawalButton;
+    private ImageButton backBtn;
+    private RadioButton radioBtn;
+    private Button cancelBtn, withdrawalBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,42 +32,42 @@ public class WithdrawalActivity extends Activity {
         setContentView(R.layout.activity_withdrawal);
 
         // XML 레이아웃의 요소와 연결
-        backButton = findViewById(R.id.back_ic);
-        radioButton = findViewById(R.id.radioButton);
-        cancelButton = findViewById(R.id.wbtn1);
-        withdrawalButton = findViewById(R.id.wbtn2);
+        backBtn = findViewById(R.id.back_ic);
+        radioBtn = findViewById(R.id.radioButton);
+        cancelBtn = findViewById(R.id.wbtn1);
+        withdrawalBtn = findViewById(R.id.wbtn2);
 
         // 뒤로가기 버튼 클릭 시
-        backButton.setOnClickListener(new View.OnClickListener() {
+        backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
 
-        cancelButton.setOnClickListener(new View.OnClickListener() {
+        cancelBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
         // RadioButton 상태 변경 시
-        radioButton.setOnClickListener(new View.OnClickListener() {
+        radioBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (radioButton.isChecked()) {
-                    withdrawalButton.setEnabled(true);
+                if (radioBtn.isChecked()) {
+                    withdrawalBtn.setEnabled(true);
                 } else {
-                    withdrawalButton.setEnabled(false);
+                    withdrawalBtn.setEnabled(false);
                 }
             }
         });
 
         // 탈퇴하기 버튼 클릭 시
-        withdrawalButton.setOnClickListener(new View.OnClickListener() {
+        withdrawalBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (radioButton.isChecked()) {
+                if (radioBtn.isChecked()) {
                     showConfirmationDialog();
                 } else {
                     Toast.makeText(WithdrawalActivity.this, "체크박스를 체크해주세요.", Toast.LENGTH_SHORT).show();

@@ -84,6 +84,9 @@ public class MyPageActivity extends AppCompatActivity implements View.OnClickLis
         ImageButton ChangeBtn = findViewById(R.id.change_move);
         ChangeBtn.setOnClickListener(this);
 
+        ImageButton PwdChangeBtn = findViewById(R.id.pwd_change_move);
+        PwdChangeBtn.setOnClickListener(this);
+
         ImageButton orderBtn = findViewById(R.id.jmny_move);
         orderBtn.setOnClickListener(this);
 
@@ -119,6 +122,9 @@ public class MyPageActivity extends AppCompatActivity implements View.OnClickLis
             startActivity(intent);
         } else if (id == R.id.change_move) {
             intent = new Intent(MyPageActivity.this, ChangeActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.pwd_change_move) {
+            intent = new Intent(MyPageActivity.this, PwdChangeActivity.class);
             startActivity(intent);
         } else if (id == R.id.jmny_move) {
             intent = new Intent(MyPageActivity.this, ReviewWriteActivity.class);
