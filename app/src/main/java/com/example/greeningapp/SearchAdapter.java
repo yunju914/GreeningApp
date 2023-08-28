@@ -20,13 +20,6 @@ public class SearchAdapter extends FirebaseRecyclerAdapter<Product,SearchAdapter
         super(options);
     }
 
-//    @Override
-//    protected void onBindViewHolder(@NonNull myviewholder holder, int position, @NonNull Product product) {
-//        holder.pname.setText(product.getPname());
-//        holder.psay.setText(product.getPsay());
-//        holder.pprice.setText(String.valueOf(product.getPprice())); // int 값을 String으로 변환하여 setText
-//        Glide.with(holder.pimg.getContext()).load(product.getPimg()).into(holder.pimg);
-//    }
 @Override
 protected void onBindViewHolder(@NonNull myviewholder holder, int position, @NonNull Product product) {
     holder.pname.setText(getItem(position).getPname());

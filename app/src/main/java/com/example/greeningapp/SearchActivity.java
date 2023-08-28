@@ -43,7 +43,7 @@ public class SearchActivity extends AppCompatActivity {
 
         FirebaseRecyclerOptions<Product> options =
                 new FirebaseRecyclerOptions.Builder<Product>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Product").orderByChild("pname"), Product.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Product"), Product.class)
                         .build();
 
         adapter = new SearchAdapter(options);
@@ -109,14 +109,12 @@ public class SearchActivity extends AppCompatActivity {
     private void processsearch(String s) {
         FirebaseRecyclerOptions<Product> options =
                 new FirebaseRecyclerOptions.Builder<Product>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Product").orderByChild("pname").startAt(s).endAt(s + "\uf8ff"), Product.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Product")
+                        .orderByChild("psearch").startAt(s).endAt(s + "\uf8ff"), Product.class)
                         .build();
-
         adapter = new SearchAdapter(options);
         adapter.startListening();
         recview.setAdapter(adapter);
     }
 
 }
-
-

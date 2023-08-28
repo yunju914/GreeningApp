@@ -7,12 +7,13 @@ public class Product implements Serializable {
     private String pname;
     private int pprice;
     private String psay;
+    private String psearch;
     private String pdetailimg;
     private int pid;
     private int stock;
     private int category;
 
-    public Product(){
+    public Product() {
     }
 
     public String getPimg() {
@@ -39,9 +40,13 @@ public class Product implements Serializable {
         this.pprice = pprice;
     }
 
-    public String getPsay() { return psay; }
+    public String getPsay() {
+        return psay;
+    }
 
-    public void setPsay(String psay) { this.psay = psay; }
+    public void setPsay(String psay) {
+        this.psay = psay;
+    }
 
     public String getPdetailimg() {
         return pdetailimg;
@@ -73,5 +78,13 @@ public class Product implements Serializable {
 
     public void setCategory(int category) {
         this.category = category;
+    }
+
+    public String getPsearch() {
+        return psearch;
+    }
+
+    public void setPsearch(String psearch) {
+        this.psearch = psearch;
     }
 }
