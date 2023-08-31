@@ -14,7 +14,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GreeningApp">
         <activity
-            android:name=".MainActivity"
+            android:name=".PointHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ChangeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DoCertificateDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DonationCertificateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AttendanceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".CategoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BuyNowActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuizActivity"
             android:exported="false" />
         <activity
             android:name=".ReviewWriteActivity"
@@ -47,9 +68,6 @@
             android:name=".CartActivity"
             android:exported="false" />
         <activity
-            android:name=".ChangeActivity"
-            android:exported="false" />
-        <activity
             android:name=".ProductDetailActivity"
             android:exported="false" />
         <activity
@@ -59,7 +77,7 @@
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".CategoryActivity"
+            android:name=".SearchActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
@@ -68,7 +86,7 @@
             android:name=".PwdChangeActivity"
             android:exported="false" />
         <activity
-            android:name=".SearchActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -45,8 +45,7 @@ public class CategoryActivity extends AppCompatActivity{
         getMenuInflater().inflate(R.menu.categorymenu, menu);
         return super.onCreateOptionsMenu(menu);
     }
-    //onCreateOptionMenu : 옵션메뉴들을 생성해주는 메소드
-    //onOptionsItemSelected : MenuItem item을 매개변수로 받아 해당하는 case의 코드를 실행
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();

@@ -1,6 +1,8 @@
 package com.example.greeningapp;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +36,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CategoryViewHorder holder, int position) {
+    public void onBindViewHolder(@NonNull CategoryViewHorder holder, @SuppressLint("RecyclerView") int position) {
         Glide.with(holder.itemView)
                 .load(arrayList.get(position).getPimg())
                 .into(holder.p_pic);
@@ -42,6 +44,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         holder.p_say.setText(arrayList.get(position).getPsay());
         holder.p_price.setText(String.valueOf(arrayList.get(position).getPprice()));
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ProductDetailActivity.class);
+                intent.putExtra("detail", arrayList.get(position));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
