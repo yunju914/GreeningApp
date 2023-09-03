@@ -27,37 +27,37 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <!--    <androidx.constraintlayout.widget.ConstraintLayout-->
-    <!--        android:id="@+id/constraint1"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:visibility="gone">-->
+<!--    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--        android:id="@+id/constraint1"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:visibility="gone">-->
 
-    <!--        <ImageView-->
-    <!--            android:id="@+id/new_products_img"-->
-    <!--            android:layout_width="400dp"-->
-    <!--            android:layout_height="300dp"-->
-    <!--            android:src="@drawable/baseline_remove_shopping_cart_24"-->
-    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--            app:layout_constraintEnd_toEndOf="parent"-->
-    <!--            app:layout_constraintStart_toStartOf="parent"-->
-    <!--            app:layout_constraintTop_toTopOf="parent"-->
-    <!--            app:layout_constraintVertical_bias=".3"/>-->
+<!--        <ImageView-->
+<!--            android:id="@+id/new_products_img"-->
+<!--            android:layout_width="400dp"-->
+<!--            android:layout_height="300dp"-->
+<!--            android:src="@drawable/baseline_remove_shopping_cart_24"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--            app:layout_constraintVertical_bias=".3"/>-->
 
-    <!--        <TextView-->
-    <!--            android:layout_width="match_parent"-->
-    <!--            android:layout_height="wrap_content"-->
-    <!--            android:text="Your Cart Is Empty"-->
-    <!--            android:textSize="22sp"-->
-    <!--            android:layout_marginTop="16dp"-->
-    <!--            app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--            app:layout_constraintEnd_toEndOf="parent"-->
-    <!--            app:layout_constraintStart_toStartOf="parent"-->
-    <!--            app:layout_constraintTop_toBottomOf="@+id/new_products_img"-->
-    <!--            android:textAlignment="center"-->
-    <!--            app:layout_constraintVertical_bias="0"/>-->
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Your Cart Is Empty"-->
+<!--            android:textSize="22sp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/new_products_img"-->
+<!--            android:textAlignment="center"-->
+<!--            app:layout_constraintVertical_bias="0"/>-->
 
-    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
+<!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint2"

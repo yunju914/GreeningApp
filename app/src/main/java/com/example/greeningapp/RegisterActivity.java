@@ -1,16 +1,15 @@
 package com.example.greeningapp;
 
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -44,7 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("UserAccount");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("User");
 
         mEtEmail = findViewById(R.id.et_email);
         mEtPwd = findViewById(R.id.et_pwd);
@@ -73,32 +72,32 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
-                            UserAccount account = new UserAccount();
-                            account.setIdToken(firebaseUser.getUid());
-                            account.setEmailId(firebaseUser.getEmail());
-                            account.setPassword(strPwd);
-                            account.setUsername(strName);
-                            account.setPhone(strPhone);
-                            account.setPostcode(strPostcode);
-                            account.setAddress(strAddress);
-                            account.setRegdate(getTime());
-                            account.setUpoint(0);
-                            account.setSpoint(0);
+                            User user = new User();
+                            user.setIdToken(firebaseUser.getUid());
+                            user.setEmailId(firebaseUser.getEmail());
+                            user.setPassword(strPwd);
+
+                            user.setUsername(strName);
+                            user.setPhone(strPhone);
+                            user.setPostcode(strPostcode);
+                            user.setAddress(strAddress);
+                            user.setRegdate(getTime());
+                            user.setUpoint(0);
+                            user.setSpoint(0);
+                            user.setDoquiz("No");
+
+                            user.getAttendance();
+
 
                             //setValue : database에 insert(삽입) 행위
                             // 회원 정보 데이터베이스에 저장
-                            mDatabaseRef.child(firebaseUser.getUid()).setValue(account);
+                            mDatabaseRef.child(firebaseUser.getUid()).setValue(user);
 
-                            Toast.makeText(RegisterActivity.this, "회원가입에 성공하셨습니다.\n3초 뒤 로그인 화면으로 이동합니다", Toast.LENGTH_SHORT).show();
-                            //일정 시간 지나면 다른 액티비티로 이동함
-                            new Handler().postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            }, 3000); // 3초 후에 이동
+                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                            intent.putExtra("userEmail", firebaseUser.getEmail());
+                            startActivity(intent);
+
+                            Toast.makeText(RegisterActivity.this, "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(RegisterActivity.this, "회원가입에 실패하셨습니다.", Toast.LENGTH_SHORT).show();
                         }

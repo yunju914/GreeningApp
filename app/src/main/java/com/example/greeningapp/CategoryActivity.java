@@ -28,7 +28,7 @@ public class CategoryActivity extends AppCompatActivity{
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);//기본 제목 삭제.
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.baseline_back); //
+        actionBar.setHomeAsUpIndicator(R.drawable.baseline_arrow_back_24); //
 
         tab = findViewById(R.id.tab);
         viewPager = findViewById(R.id.viewPager);
@@ -45,7 +45,8 @@ public class CategoryActivity extends AppCompatActivity{
         getMenuInflater().inflate(R.menu.categorymenu, menu);
         return super.onCreateOptionsMenu(menu);
     }
-
+    //onCreateOptionMenu : 옵션메뉴들을 생성해주는 메소드
+    //onOptionsItemSelected : MenuItem item을 매개변수로 받아 해당하는 case의 코드를 실행
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
@@ -63,4 +64,3 @@ public class CategoryActivity extends AppCompatActivity{
         }
     }
 }
-

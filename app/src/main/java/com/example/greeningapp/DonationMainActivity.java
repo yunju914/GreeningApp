@@ -1,13 +1,13 @@
 package com.example.greeningapp;
 
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Bundle;
-import android.util.Log;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -77,7 +77,7 @@ public class DonationMainActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
 
-        databaseReference2 = FirebaseDatabase.getInstance().getReference("UserAccount");
+        databaseReference2 = FirebaseDatabase.getInstance().getReference("User");
 
         databaseReference2.child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -85,8 +85,8 @@ public class DonationMainActivity extends AppCompatActivity {
                 // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
                 // 회원 정보 테이블에서 sPoint 데이터 가져와서 뿌리기
 
-                UserAccount userAccount = dataSnapshot.getValue(UserAccount.class); //  만들어 뒀던 Product 객체에 데이터를 담는다.
-                donationPoint.setText(userAccount.getSpoint() + " 씨드");
+                User user = dataSnapshot.getValue(User.class); //  만들어 뒀던 Product 객체에 데이터를 담는다.
+                donationPoint.setText(user.getSpoint() + " 씨드");
 
             }
 

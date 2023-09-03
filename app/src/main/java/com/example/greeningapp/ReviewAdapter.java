@@ -8,13 +8,11 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewViewHolder>{
@@ -29,14 +27,14 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ReviewView
 
     @NonNull
     @Override
-    public ReviewAdapter.ReviewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ReviewViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.review_item, parent, false);
         ReviewViewHolder holder = new ReviewViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ReviewAdapter.ReviewViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ReviewViewHolder holder, int position) {
         Glide.with(holder.itemView)
                 .load(reviewList.get(position).getRid())
                 .into(holder.inputimg);

@@ -3,10 +3,8 @@ package com.example.greeningapp;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,10 +39,10 @@ public class MyPageActivity extends AppCompatActivity implements View.OnClickLis
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.baseline_back);
+        actionBar.setHomeAsUpIndicator(R.drawable.baseline_arrow_back_24);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("UserAccount");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("User");
 
         Tv_my_name = findViewById(R.id.my_name);
         myPageSeed = (TextView) findViewById(R.id.myPageSeed);
@@ -73,7 +71,13 @@ public class MyPageActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         ImageButton pointBtn = findViewById(R.id.pn_move);
-        pointBtn.setOnClickListener(this);
+        pointBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MyPageActivity.this, PointHistoryActivity.class);
+                startActivity(intent);
+            }
+        });
 
         ImageButton checkInBtn = findViewById(R.id.cc_move);
         checkInBtn.setOnClickListener(this);
@@ -83,9 +87,6 @@ public class MyPageActivity extends AppCompatActivity implements View.OnClickLis
 
         ImageButton ChangeBtn = findViewById(R.id.change_move);
         ChangeBtn.setOnClickListener(this);
-
-        ImageButton PwdChangeBtn = findViewById(R.id.pwd_change_move);
-        PwdChangeBtn.setOnClickListener(this);
 
         ImageButton orderBtn = findViewById(R.id.jmny_move);
         orderBtn.setOnClickListener(this);
@@ -110,21 +111,16 @@ public class MyPageActivity extends AppCompatActivity implements View.OnClickLis
 
         //씨드 X
         if (id == R.id.pn_move) {
-//            intent = new Intent(MyPageActivity.this, PointHistoryActivity.class);
-//            startActivity(intent);
-            //체크내역 X
+            intent = new Intent(MyPageActivity.this, PointHistoryActivity.class);
+            startActivity(intent);
         } else if (id == R.id.cc_move) {
-//            intent = new Intent(MyPageActivity.this, CheckInActivity.class);
-//            startActivity(intent);
-            //기부 내역 X
+            intent = new Intent(MyPageActivity.this, AttendanceActivity.class);
+            startActivity(intent);
         } else if (id == R.id.gv_move) {
-            intent = new Intent(MyPageActivity.this, DonationDetailActivity.class);
+            intent = new Intent(MyPageActivity.this, DonationCertificateActivity.class);
             startActivity(intent);
         } else if (id == R.id.change_move) {
             intent = new Intent(MyPageActivity.this, ChangeActivity.class);
-            startActivity(intent);
-        } else if (id == R.id.pwd_change_move) {
-            intent = new Intent(MyPageActivity.this, PwdChangeActivity.class);
             startActivity(intent);
         } else if (id == R.id.jmny_move) {
             intent = new Intent(MyPageActivity.this, ReviewWriteActivity.class);

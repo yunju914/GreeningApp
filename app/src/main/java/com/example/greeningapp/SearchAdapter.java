@@ -1,8 +1,5 @@
 package com.example.greeningapp;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,33 +13,27 @@ import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
-import java.util.ArrayList;
-
 public class SearchAdapter extends FirebaseRecyclerAdapter<Product,SearchAdapter.myviewholder> {
-    private ArrayList<Product> arrayList;
-    private Context context;
+
     public SearchAdapter(@NonNull FirebaseRecyclerOptions<Product> options) {
+
         super(options);
     }
 
-@Override
-protected void onBindViewHolder(@NonNull myviewholder holder, @SuppressLint("RecyclerView") int position, @NonNull Product product) {
-    holder.pname.setText(getItem(position).getPname());
-    holder.psay.setText(getItem(position).getPsay());
-    holder.pprice.setText(String.valueOf(getItem(position).getPprice()));
-    Glide.with(holder.pimg.getContext()).load(getItem(position).getPimg()).into(holder.pimg);
-
-    holder.itemView.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            // 클릭된 상품의 정보를 가져와서 새 액티비티에 전달
-            Product selectedProduct = getItem(position);
-            Intent intent = new Intent(v.getContext(), ProductDetailActivity.class);
-            intent.putExtra("detail", selectedProduct);
-            v.getContext().startActivity(intent);
-        }
-    });
-}
+    //    @Override
+//    protected void onBindViewHolder(@NonNull myviewholder holder, int position, @NonNull Product product) {
+//        holder.pname.setText(product.getPname());
+//        holder.psay.setText(product.getPsay());
+//        holder.pprice.setText(String.valueOf(product.getPprice())); // int 값을 String으로 변환하여 setText
+//        Glide.with(holder.pimg.getContext()).load(product.getPimg()).into(holder.pimg);
+//    }
+    @Override
+    protected void onBindViewHolder(@NonNull myviewholder holder, int position, @NonNull Product product) {
+        holder.pname.setText(getItem(position).getPname());
+//        holder.psay.setText(getItem(position).getPsay());
+        holder.pprice.setText(String.valueOf(getItem(position).getPprice()));
+        Glide.with(holder.pimg.getContext()).load(getItem(position).getPimg()).into(holder.pimg);
+    }
 
 
     @NonNull
@@ -59,15 +50,12 @@ protected void onBindViewHolder(@NonNull myviewholder holder, @SuppressLint("Rec
 
         public myviewholder(@NonNull View itemView) {
             super(itemView);
-            this.pimg = (ImageView) itemView.findViewById(R.id.pimg);
-            this.pname = (TextView) itemView.findViewById(R.id.pname);
-            this.psay = (TextView) itemView.findViewById(R.id.psay);
-            this.pprice = (TextView) itemView.findViewById(R.id.pprice);
+            pimg = (ImageView) itemView.findViewById(R.id.searchpimg);
+            pname = (TextView) itemView.findViewById(R.id.searchpname);
+            psay = (TextView) itemView.findViewById(R.id.searchpsay);
+            pprice = (TextView) itemView.findViewById(R.id.searchpprice);
 
         }
 
     }
 }
-
-
-

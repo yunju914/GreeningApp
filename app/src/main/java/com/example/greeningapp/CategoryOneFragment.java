@@ -20,7 +20,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-
 public class CategoryOneFragment extends Fragment {
     private RecyclerView recyclerView;
     private RecyclerView.Adapter adapter;

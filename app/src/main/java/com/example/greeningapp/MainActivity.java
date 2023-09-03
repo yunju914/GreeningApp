@@ -1,22 +1,19 @@
 package com.example.greeningapp;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
-import androidx.viewpager2.widget.ViewPager2;
-import me.relex.circleindicator.CircleIndicator3;
-
-//상품진열
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,6 +22,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+
+import me.relex.circleindicator.CircleIndicator3;
 
 public class MainActivity extends FragmentActivity {
 
@@ -46,6 +45,9 @@ public class MainActivity extends FragmentActivity {
     private DatabaseReference databaseReference;
     private Button goToShoppingMain;
 
+//    // 임시 하단바 버튼
+//    private Button mainbtnCart, mainbtnDonation, mainbtnMyPage;
+
     private ImageButton navMain, navCategory, navDonation, navMypage;
 
     //슬라이드1 화면
@@ -53,49 +55,6 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        // 하단바 아이콘 초기화
-        navMain = findViewById(R.id.navMain);
-        navCategory = findViewById(R.id.navCategory);
-        navDonation = findViewById(R.id.navDonation);
-        navMypage = findViewById(R.id.navMypage);
-
-        // 각 아이콘 클릭 이벤트 처리
-        navMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 홈 아이콘 클릭 시 처리할 내용
-                Intent intent = new Intent(MainActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        navCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 카테고리 아이콘 클릭 시 처리할 내용
-                Intent intent = new Intent(MainActivity.this, CategoryActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        navDonation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 기부 아이콘 클릭 시 처리할 내용
-                Intent intent = new Intent(MainActivity.this, DonationMainActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        navMypage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 마이페이지 아이콘 클릭 시 처리할 내용
-                Intent intent = new Intent(MainActivity.this, MyPageActivity.class);
-                startActivity(intent);
-            }
-        });
 
         // ViewPager2
         mPager = findViewById(R.id.viewpager);
@@ -153,6 +112,7 @@ public class MainActivity extends FragmentActivity {
             }
         });
         adapter = new MainProductAdapter(arrayList, this);
+//        adapter = new ProductAdapter(arrayList, this);
         recyclerView.setAdapter(adapter);  //리사이클뷰에 어댑터연결
 
 
@@ -172,6 +132,7 @@ public class MainActivity extends FragmentActivity {
                 mIndicator.animatePageSelected(position % num_page);
             }
         });
+
         //슬라이드2
 //        mPager01.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
 //            @Override
@@ -192,9 +153,56 @@ public class MainActivity extends FragmentActivity {
         goToShoppingMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ShoppingMainActivity.class);
+                Intent intent = new Intent(MainActivity.this, CategoryActivity.class);
+                startActivity(intent);
+
+//                Intent intent = new Intent(MainActivity.this, ShoppingMainActivity.class);
+//                startActivity(intent);
+            }
+        });
+
+        // 하단바 아이콘 초기화
+        navMain = findViewById(R.id.navMain);
+        navCategory = findViewById(R.id.navCategory);
+        navDonation = findViewById(R.id.navDonation);
+        navMypage = findViewById(R.id.navMypage);
+
+        // 각 아이콘 클릭 이벤트 처리
+        navMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 홈 아이콘 클릭 시 처리할 내용
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
+
+        navCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 카테고리 아이콘 클릭 시 처리할 내용
+                Intent intent = new Intent(MainActivity.this, CategoryActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        navDonation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 기부 아이콘 클릭 시 처리할 내용
+                Intent intent = new Intent(MainActivity.this, DonationMainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        navMypage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 마이페이지 아이콘 클릭 시 처리할 내용
+                Intent intent = new Intent(MainActivity.this, MyPageActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 }

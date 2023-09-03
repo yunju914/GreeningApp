@@ -16,7 +16,7 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_margin="16dp"
-            android:background="@drawable/back_ic"
+            android:background="@drawable/move_ic"
             android:contentDescription="뒤로가기"
             android:scaleType="centerInside"
             app:layout_constraintStart_toStartOf="parent"

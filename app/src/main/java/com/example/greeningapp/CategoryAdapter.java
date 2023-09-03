@@ -41,7 +41,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 .load(arrayList.get(position).getPimg())
                 .into(holder.p_pic);
         holder.p_name.setText(arrayList.get(position).getPname());
-        holder.p_say.setText(arrayList.get(position).getPsay());
+//        holder.p_say.setText(arrayList.get(position).getPsay()); -> 오류
         holder.p_price.setText(String.valueOf(arrayList.get(position).getPprice()));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +52,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
                 context.startActivity(intent);
             }
         });
+
     }
 
     @Override
@@ -67,10 +68,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
         TextView p_price;
         public CategoryViewHorder(@NonNull View itemView) {
             super(itemView);
-            this.p_pic= itemView.findViewById(R.id.pimg);
-            this.p_name= itemView.findViewById(R.id.pname);
-            this.p_say= itemView.findViewById(R.id.psay);
-            this.p_price= itemView.findViewById(R.id.pprice);
+            this.p_pic= itemView.findViewById(R.id.searchpimg);
+            this.p_name= itemView.findViewById(R.id.searchpname);
+            this.p_say= itemView.findViewById(R.id.searchpsay);
+            this.p_price= itemView.findViewById(R.id.searchpprice);
         }
     }
 }

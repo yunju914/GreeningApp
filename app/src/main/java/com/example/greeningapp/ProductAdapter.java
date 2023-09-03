@@ -15,9 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import org.w3c.dom.Text;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ProductAdapter  extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder>{
@@ -32,14 +29,14 @@ public class ProductAdapter  extends RecyclerView.Adapter<ProductAdapter.Product
 
     @NonNull
     @Override
-    public ProductAdapter.ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ProductViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.product_item, parent, false);
         ProductViewHolder holder = new ProductViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProductAdapter.ProductViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull ProductViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Glide.with(holder.itemView)
                 .load(arrayList.get(position).getPimg())
                 .into(holder.imageView);

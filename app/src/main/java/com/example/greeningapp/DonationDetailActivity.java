@@ -1,8 +1,5 @@
 package com.example.greeningapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +11,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -83,7 +83,7 @@ public class DonationDetailActivity extends AppCompatActivity {
 
         dodetailImg = findViewById(R.id.dodetailed_img);
         dodetailName = findViewById(R.id.dodetailed_name);
-        dodetailLongImg = findViewById(R.id.dodetailed_img);
+        dodetailLongImg = findViewById(R.id.dodetail_longimg);
         dodetailStart = findViewById(R.id.dodetail_start);
         dodetailEnd = findViewById(R.id.dodetail_end);
         dodetailuPoint = findViewById(R.id.detailU_point);
@@ -107,7 +107,7 @@ public class DonationDetailActivity extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference("Point");
 
-        databaseReference2 = FirebaseDatabase.getInstance().getReference("UserAccount");
+        databaseReference2 = FirebaseDatabase.getInstance().getReference("User");
 
         databaseReference3 = FirebaseDatabase.getInstance().getReference("Donation");
 
@@ -119,8 +119,8 @@ public class DonationDetailActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                UserAccount userAccount = dataSnapshot.getValue(UserAccount.class); //  만들어 뒀던 Product 객체에 데이터를 담는다.
-                dodetailuPoint.setText(userAccount.getSpoint() + " 씨드");
+                User user = dataSnapshot.getValue(User.class);; //  만들어 뒀던 Product 객체에 데이터를 담는다.
+                dodetailuPoint.setText(user.getSpoint() + " 씨드");
 
             }
 
@@ -205,14 +205,14 @@ public class DonationDetailActivity extends AppCompatActivity {
 
                                     // 기부한 정보를 저장하기 위해서 데이터베이스 값 가져오기
 
-                                    UserAccount userAccount = dataSnapshot.getValue(UserAccount.class); //  만들어 뒀던 Product 객체에 데이터를 담는다.
+                                    User user = dataSnapshot.getValue(User.class); //  만들어 뒀던 Product 객체에 데이터를 담는다.
                                     final HashMap<String, Object> donateMap = new HashMap<>();
                                     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                                    donateMap.put("userName", userAccount.getUsername());
+                                    donateMap.put("userName", user.getUsername());
                                     donateMap.put("donationName", donationName);
                                     donateMap.put("donationPoint", Integer.parseInt(wannaDonatepoint.getText().toString()));
                                     donateMap.put("donationDate", getTime());
-                                    userAccountName = userAccount.getUsername();
+                                    userAccountName = user.getUsername();
 
                                     // 기부한 정보 저장
                                     databaseReference4.child(firebaseUser.getUid()).child("MyPoint").child(pointID).setValue(donateMap).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -288,12 +288,12 @@ public class DonationDetailActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                         // 기부하기 버튼을 누르면 유저 테이블에서 유저 정보를 가져와 테이블에 저장
-                        UserAccount userAccount = dataSnapshot.getValue(UserAccount.class); //  만들어 뒀던 Product 객체에 데이터를 담는다.
+                        User user = dataSnapshot.getValue(User.class); //  만들어 뒀던 Product 객체에 데이터를 담는다.
                         final HashMap<String, Object> donateMap = new HashMap<>();
                         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                        donateMap.put("spoint", userAccount.getSpoint());
-                        donateMap.put("upoint", userAccount.getUpoint());
-                        donateMap.put("username", userAccount.getUsername());
+                        donateMap.put("spoint", user.getSpoint());
+                        donateMap.put("upoint", user.getUpoint());
+                        donateMap.put("username", user.getUsername());
 
                         databaseReference.child(firebaseUser.getUid()).setValue(donateMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override

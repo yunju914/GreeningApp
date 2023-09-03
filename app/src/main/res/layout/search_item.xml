@@ -13,45 +13,45 @@
         android:padding="10dp">
 
         <ImageView
-            android:id="@+id/pimg"
+            android:id="@+id/searchpimg"
             android:layout_width="95dp"
             android:layout_height="89dp"
             android:layout_centerVertical="true"
             android:src="@mipmap/ic_launcher" />
 
         <TextView
-            android:id="@+id/pname"
+            android:id="@+id/searchpname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="2dp"
-            android:layout_toRightOf="@id/pimg"
+            android:layout_toRightOf="@id/searchpimg"
             android:text="This is P_Name"
             android:textColor="#000"
             android:textSize="20sp"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/psay"
+            android:id="@+id/searchpsay"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/pname"
+            android:layout_below="@id/searchpname"
             android:layout_marginLeft="10dp"
             android:layout_marginBottom="2dp"
-            android:layout_toRightOf="@id/pimg"
+            android:layout_toRightOf="@id/searchpimg"
             android:text="This is P_say"
             android:textColor="#000"
             android:textSize="14sp" />
 
 
         <TextView
-            android:id="@+id/pprice"
+            android:id="@+id/searchpprice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/psay"
+            android:layout_below="@id/searchpsay"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/pimg"
+            android:layout_toRightOf="@id/searchpimg"
             android:text="This is P_price"
             android:textAlignment="textEnd"
             android:textColor="#000"

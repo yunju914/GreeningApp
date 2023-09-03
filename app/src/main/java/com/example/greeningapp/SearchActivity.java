@@ -1,5 +1,4 @@
 package com.example.greeningapp;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,6 +18,7 @@ public class SearchActivity extends AppCompatActivity {
     //    private FirebaseDatabase database;
     RecyclerView recview;
     SearchAdapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     Toolbar toolbar;
 
@@ -32,18 +32,19 @@ public class SearchActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);//기본 제목 삭제.
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.baseline_back);
+        actionBar.setHomeAsUpIndicator(R.drawable.baseline_arrow_back_24);
 
-        recview = findViewById(R.id.recview);
+        recview = findViewById(R.id.searchRecyclerView);
         recview.setLayoutManager(new LinearLayoutManager(this));
 
         //뒤로가기시 리사이클러뷰 에러 나는 것 수정
-        RecycleError layoutManager = new RecycleError(this);
-        recview.setLayoutManager(layoutManager);
+
+//        RecycleError layoutManager = new RecycleError(this);
+//        recview.setLayoutManager(layoutManager);
 
         FirebaseRecyclerOptions<Product> options =
                 new FirebaseRecyclerOptions.Builder<Product>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Product"), Product.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Product").orderByChild("pname"), Product.class)
                         .build();
 
         adapter = new SearchAdapter(options);
@@ -100,7 +101,7 @@ public class SearchActivity extends AppCompatActivity {
             return true;
         }
         else if (itemId == R.id.action_cart) {
-            Intent intent = new Intent(SearchActivity.this, CartActivity.class);
+            Intent intent = new Intent(SearchActivity.this, MyPageActivity.class);
             startActivity(intent);
             return true;
         }
@@ -109,9 +110,9 @@ public class SearchActivity extends AppCompatActivity {
     private void processsearch(String s) {
         FirebaseRecyclerOptions<Product> options =
                 new FirebaseRecyclerOptions.Builder<Product>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Product")
-                        .orderByChild("psearch").startAt(s).endAt(s + "\uf8ff"), Product.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Product").orderByChild("psearch").startAt(s).endAt(s + "\uf8ff"), Product.class)
                         .build();
+
         adapter = new SearchAdapter(options);
         adapter.startListening();
         recview.setAdapter(adapter);
