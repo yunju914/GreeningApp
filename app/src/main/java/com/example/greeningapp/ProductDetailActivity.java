@@ -1,4 +1,10 @@
 package com.example.greeningapp;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -10,13 +16,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -103,7 +102,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             Glide.with(getApplicationContext()).load(product.getPimg()).into(detailedImg);
 //            description.setText(product.getDescription());
             price.setText(String.valueOf(product.getPprice()));
-            stock.setText("재고: " + String.valueOf(product.getStock()));
+            stock.setText("( 재고: " + String.valueOf(product.getStock()) + " )");
             name.setText(product.getPname());
             Glide.with(getApplicationContext()).load(product.getPdetailimg()).into(detailedLongImg);
 

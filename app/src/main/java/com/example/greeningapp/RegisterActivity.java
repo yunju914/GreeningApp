@@ -1,6 +1,8 @@
 package com.example.greeningapp;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -93,13 +95,32 @@ public class RegisterActivity extends AppCompatActivity {
                             // 회원 정보 데이터베이스에 저장
                             mDatabaseRef.child(firebaseUser.getUid()).setValue(user);
 
-                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                            intent.putExtra("userEmail", firebaseUser.getEmail());
-                            startActivity(intent);
-
-                            Toast.makeText(RegisterActivity.this, "회원가입에 성공하셨습니다.", Toast.LENGTH_SHORT).show();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                            builder.setTitle("로그인 성공");
+                            builder.setMessage("회원가입 성공! 로그인 화면으로 이동합니다");
+                            builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // 확인 버튼을 클릭하면 LoginActivity로 이동합니다.
+                                    finish();
+                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                    intent.putExtra("userEmail", firebaseUser.getEmail());
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
                         } else {
-                            Toast.makeText(RegisterActivity.this, "회원가입에 실패하셨습니다.", Toast.LENGTH_SHORT).show();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                            builder.setTitle("회원가입 실패");
+                            builder.setMessage("회원가입에 실패했습니다. 다시 시도해주세요");
+                            builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                }
+                            });
+                            AlertDialog dialog = builder.create();
+                            dialog.show();
                         }
                     }
                 });

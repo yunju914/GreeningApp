@@ -8,10 +8,10 @@ android:layout_height="match_parent"
 tools:context=".CategoryActivity">
 
 <androidx.appcompat.widget.Toolbar
-    android:id="@+id/toolbarcategory"
+    android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/colorPrimary"
+    android:background="?attr/colorOnPrimary"
     android:minHeight="?attr/actionBarSize"
     android:theme="?attr/actionBarTheme"
     app:layout_constraintTop_toTopOf="parent"

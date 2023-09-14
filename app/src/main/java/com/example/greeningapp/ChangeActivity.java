@@ -133,7 +133,7 @@ public class ChangeActivity extends AppCompatActivity {
             Toast.makeText(ChangeActivity.this, "회원 정보가 수정되었습니다.", Toast.LENGTH_SHORT).show();
         }
     }
-    private void setUpdatePasswordBtn() { // 비밀번호 재설정 버튼 이벤트
+    private void setUpdatePasswordBtn(View view) {
 
         // 팝업 다이얼로그
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

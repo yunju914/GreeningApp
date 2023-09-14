@@ -1,5 +1,11 @@
 package com.example.greeningapp;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,12 +13,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -56,9 +56,13 @@ public class OrderActivity extends AppCompatActivity {
     private TextView orderPhone;
     private TextView orderAddress;
 
+    private TextView orderPostcode;
+
     private String strOrderName;
     private String strOrderPhone;
     private String strOrderAddress;
+
+    private String strOrderPostcode;
     private int userSPoint;
 
     int total = 0;
@@ -89,6 +93,7 @@ public class OrderActivity extends AppCompatActivity {
         orderName = (TextView)findViewById(R.id.order_name);
         orderPhone = (TextView)findViewById(R.id.order_phone);
         orderAddress = (TextView)findViewById(R.id.order_address);
+        orderPostcode = (TextView) findViewById(R.id.order_postcode);
 
         databaseReference2 = FirebaseDatabase.getInstance().getReference("User");
 
@@ -107,11 +112,13 @@ public class OrderActivity extends AppCompatActivity {
                 orderName.setText(user.getUsername());
                 orderPhone.setText(user.getPhone());
                 orderAddress.setText(user.getAddress());
+                orderPostcode.setText(user.getPostcode());
 
                 // MyOrder 데이터베이스에 회원 정보 저장을 위해서 변수에 따로 저장
                 strOrderName = user.getUsername();
                 strOrderPhone = user.getPhone();
                 strOrderAddress = user.getAddress();
+                strOrderPostcode = user.getPostcode();
 
                 // 결제 시 회원 테이블에 있는 sPoint 변경을 위해서 기존 sPoint를 변수에 저장
                 userSPoint = user.getSpoint();
@@ -176,6 +183,8 @@ public class OrderActivity extends AppCompatActivity {
                 if (list != null && list.size() > 0) {
                     for (Cart model : list) {
 
+                        String eachOrderedId = model.getDataId();
+
                         final HashMap<String, Object> cartMap = new HashMap<>();
 
                         cartMap.put("productName", model.getProductName());
@@ -187,9 +196,13 @@ public class OrderActivity extends AppCompatActivity {
                         cartMap.put("userName", strOrderName);
                         cartMap.put("phone", strOrderPhone);
                         cartMap.put("address", strOrderAddress);
+                        cartMap.put("postcode", strOrderPostcode);
                         cartMap.put("orderId", myOrderId);
                         cartMap.put("orderDate", getTime());
+                        cartMap.put("doReview", "No");
                         cartMap.put("orderImg", model.getProductImg());
+                        cartMap.put("eachOrderedId", eachOrderedId);
+
 
                         // 결제 된 재고만큼 기존 재고에서 변경한 값을 변수에 저장
                         int totalStock = model.getProductStock() - Integer.valueOf(model.getTotalQuantity());
@@ -198,10 +211,10 @@ public class OrderActivity extends AppCompatActivity {
 
                         // 결제 버튼을 누르면 데이터베이스에 MyOrder 테이블 생성 코드
                         // 데이터베이스 경로 변경됨.
-                        databaseReference.child(firebaseUser.getUid()).child("MyOrder").child(myOrderId).child(model.getDataId()).setValue(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        databaseReference.child(firebaseUser.getUid()).child("MyOrder").child(myOrderId).child(eachOrderedId).setValue(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(OrderActivity.this, "주문완료", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(OrderActivity.this, "주문완료", Toast.LENGTH_SHORT).show();
                                 int b = list.size();
                                 while (b > 0){
                                     int pId = model.getpId();
