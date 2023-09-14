@@ -43,6 +43,15 @@ public class ChangeActivity extends AppCompatActivity {
 
         backButton = findViewById(R.id.back_ic);
 
+        Button resetPwButton = findViewById(R.id.btnPassword);
+        resetPwButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setUpdatePasswordBtn();
+            }
+        });
+
+
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,7 +142,7 @@ public class ChangeActivity extends AppCompatActivity {
             Toast.makeText(ChangeActivity.this, "회원 정보가 수정되었습니다.", Toast.LENGTH_SHORT).show();
         }
     }
-    private void setUpdatePasswordBtn(View view) {
+    private void setUpdatePasswordBtn() {
 
         // 팝업 다이얼로그
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -156,6 +165,7 @@ public class ChangeActivity extends AppCompatActivity {
 
         builder.show();
     }
+
 
     // 비밀번호 재설정 이메일 보내기
     private void sendEmailForPasswordUpdate() {
