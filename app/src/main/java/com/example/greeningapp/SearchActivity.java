@@ -3,6 +3,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,8 +20,9 @@ public class SearchActivity extends AppCompatActivity {
     //    private FirebaseDatabase database;
     RecyclerView recview;
     SearchAdapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
 
+    private RecyclerView.LayoutManager layoutManager;
+    private ImageButton navMain, navCategory, navDonation, navMypage;
     Toolbar toolbar;
 
     @Override
@@ -44,6 +47,49 @@ public class SearchActivity extends AppCompatActivity {
 
         adapter = new SearchAdapter(options);
         recview.setAdapter(adapter);
+
+       //  하단바 아이콘 초기화
+        navMain = findViewById(R.id.navMain);
+        navCategory = findViewById(R.id.navCategory);
+        navDonation = findViewById(R.id.navDonation);
+        navMypage = findViewById(R.id.navMypage);
+
+        // 각 아이콘 클릭 이벤트 처리
+        navMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 홈 아이콘 클릭 시 처리할 내용
+                Intent intent = new Intent(SearchActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        navCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 카테고리 아이콘 클릭 시 처리할 내용
+                Intent intent = new Intent(SearchActivity.this, CategoryActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        navDonation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 기부 아이콘 클릭 시 처리할 내용
+                Intent intent = new Intent(SearchActivity.this, DonationMainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        navMypage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 마이페이지 아이콘 클릭 시 처리할 내용
+                Intent intent = new Intent(SearchActivity.this, MyPageActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

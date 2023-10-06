@@ -15,62 +15,108 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:title=""/>
-
-    <TabHost
-        android:id="@android:id/tabhost"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
+        <TabHost
+            android:id="@android:id/tabhost"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <TabWidget
-                android:id="@android:id/tabs"
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <FrameLayout
-                android:id="@android:id/tabcontent"
+                <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white" />
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <FrameLayout
+                        android:id="@android:id/tabcontent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <!-- 첫 번째 탭 -->
+                        <LinearLayout
+                            android:id="@+id/Cate_one"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+                        </LinearLayout>
+
+                        <!-- 두 번째 탭 -->
+                        <LinearLayout
+                            android:id="@+id/Cate_two"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+                        </LinearLayout>
+
+                        <!-- 세 번째 탭 -->
+                        <LinearLayout
+                            android:id="@+id/Cate_three"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+                        </LinearLayout>
+
+                        <!-- 네 번째 탭 -->
+                        <LinearLayout
+                            android:id="@+id/Cate_four"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+                        </LinearLayout>
+
+                    </FrameLayout>
+                </ScrollView>
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/bottomNavigation"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="64dp"
+                android:layout_gravity="bottom"
+                android:orientation="horizontal"
+                android:background="@color/white">
 
-                <!-- 첫 번째 탭 -->
-                <LinearLayout
-                    android:id="@+id/Cate_one"
-                    android:layout_width="match_parent"
+                <ImageButton
+                    android:id="@+id/navMain"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
-                </LinearLayout>
+                    android:layout_weight="1"
+                    android:src="@drawable/home_logo_size"
+                    android:background="@android:color/transparent"/>
 
-                <!-- 두 번째 탭 -->
-                <LinearLayout
-                    android:id="@+id/Cate_two"
-                    android:layout_width="match_parent"
+                <ImageButton
+                    android:id="@+id/navCategory"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
-                </LinearLayout>
+                    android:layout_weight="1"
+                    android:src="@drawable/shopping_logo_size"
+                    android:background="@android:color/transparent"/>
 
-                <!-- 세 번째 탭 -->
-                <LinearLayout
-                    android:id="@+id/Cate_three"
-                    android:layout_width="match_parent"
+                <ImageButton
+                    android:id="@+id/navDonation"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
-                </LinearLayout>
+                    android:layout_weight="1"
+                    android:src="@drawable/donation_logo_size"
+                    android:background="@android:color/transparent"/>
 
-                <!-- 네 번째 탭 -->
-                <LinearLayout
-                    android:id="@+id/Cate_four"
-                    android:layout_width="match_parent"
+                <ImageButton
+                    android:id="@+id/navMypage"
+                    android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
-                </LinearLayout>
+                    android:layout_weight="1"
+                    android:src="@drawable/user_logo_size"
+                    android:background="@android:color/transparent"/>
 
-            </FrameLayout>
-
-        </LinearLayout>
-    </TabHost>
+            </LinearLayout>
+        </TabHost>
 </androidx.appcompat.widget.LinearLayoutCompat>
