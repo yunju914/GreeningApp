@@ -1,5 +1,8 @@
 package com.example.greeningapp;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,12 +11,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -66,6 +67,8 @@ public class DonationDetailActivity extends AppCompatActivity {
     private String donationName = "";
 
     private String userAccountName = "";
+
+    private ImageButton navMain, navCategory, navDonation, navMypage;
 
 
     @Override
@@ -204,21 +207,21 @@ public class DonationDetailActivity extends AppCompatActivity {
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                                     // 기부한 정보를 저장하기 위해서 데이터베이스 값 가져오기
-
                                     User user = dataSnapshot.getValue(User.class); //  만들어 뒀던 Product 객체에 데이터를 담는다.
-                                    final HashMap<String, Object> donateMap = new HashMap<>();
+                                    final HashMap<String, Object> pointMap = new HashMap<>();
                                     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                                    donateMap.put("userName", user.getUsername());
-                                    donateMap.put("donationName", donationName);
-                                    donateMap.put("donationPoint", Integer.parseInt(wannaDonatepoint.getText().toString()));
-                                    donateMap.put("donationDate", getTime());
+                                    pointMap.put("userName", user.getUsername());
+                                    pointMap.put("pointName", "씨드 기부 - " + donationName);
+                                    pointMap.put("point", Integer.parseInt(wannaDonatepoint.getText().toString()));
+                                    pointMap.put("pointDate", getTime());
+                                    pointMap.put("type", "usepoint");
                                     userAccountName = user.getUsername();
 
                                     // 기부한 정보 저장
-                                    databaseReference4.child(firebaseUser.getUid()).child("MyPoint").child(pointID).setValue(donateMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    databaseReference4.child(firebaseUser.getUid()).child("MyPoint").child(pointID).setValue(pointMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            Toast.makeText(DonationDetailActivity.this, "point table create", Toast.LENGTH_SHORT).show();
+//                                            Toast.makeText(DonationDetailActivity.this, "point table create", Toast.LENGTH_SHORT).show();
                                             dialog.show();
                                         }
                                     });
@@ -255,7 +258,7 @@ public class DonationDetailActivity extends AppCompatActivity {
                     dialog.dismiss();
 
                     // 기부 하고 싶은 씨드 정보 토스트
-                    Toast.makeText(DonationDetailActivity.this, wannaDonatepoint.getText(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(DonationDetailActivity.this, wannaDonatepoint.getText(), Toast.LENGTH_SHORT).show();
                     Log.d("DonationDetailActivity",databaseReference2.child(firebaseUser.getUid()).child("spoint").toString());
                 }
 
@@ -273,7 +276,7 @@ public class DonationDetailActivity extends AppCompatActivity {
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(DonationDetailActivity.this, "임시 Point 테이블 삭제 완료", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(DonationDetailActivity.this, "임시 Point 테이블 삭제 완료", Toast.LENGTH_SHORT).show();
                             }
                         });
             }
@@ -298,7 +301,7 @@ public class DonationDetailActivity extends AppCompatActivity {
                         databaseReference.child(firebaseUser.getUid()).setValue(donateMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(DonationDetailActivity.this, "point table create", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(DonationDetailActivity.this, "point table create", Toast.LENGTH_SHORT).show();
                                 dialog.show();
                             }
                         });
@@ -316,6 +319,48 @@ public class DonationDetailActivity extends AppCompatActivity {
         });
 
         dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+
+        navMain = findViewById(R.id.navMain_doDetail);
+        navCategory = findViewById(R.id.navCategory_doDetail);
+        navDonation = findViewById(R.id.navDonation_doDetail);
+        navMypage = findViewById(R.id.navMypage_doDetail);
+
+        // 각 아이콘 클릭 이벤트 처리
+        navMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 홈 아이콘 클릭 시 처리할 내용
+                Intent intent = new Intent(DonationDetailActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        navCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 카테고리 아이콘 클릭 시 처리할 내용
+                Intent intent = new Intent(DonationDetailActivity.this, CategoryActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        navDonation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 기부 아이콘 클릭 시 처리할 내용
+                Intent intent = new Intent(DonationDetailActivity.this, DonationMainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        navMypage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 마이페이지 아이콘 클릭 시 처리할 내용
+                Intent intent = new Intent(DonationDetailActivity.this, MyPageActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

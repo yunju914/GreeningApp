@@ -1,19 +1,22 @@
 package com.example.greeningapp;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
+import me.relex.circleindicator.CircleIndicator3;
+
+//상품진열
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
-import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,8 +26,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import me.relex.circleindicator.CircleIndicator3;
-
 public class MainActivity extends FragmentActivity {
 
     private ViewPager2 mPager;
@@ -33,7 +34,7 @@ public class MainActivity extends FragmentActivity {
     private FragmentStateAdapter pagerAdapter;
     private FragmentStateAdapter pagerAdapter01;
     private final int num_page = 4;    //viewpager2에 2개의 페이지가 표시됨.
-    private final int num_page01 = 4;
+    private final int num_page01 = 3;
     private CircleIndicator3 mIndicator;
     private CircleIndicator3 mIndicator01;
     //상품목록
@@ -134,20 +135,20 @@ public class MainActivity extends FragmentActivity {
         });
 
         //슬라이드2
-//        mPager01.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
-//                if (positionOffsetPixels == 0) {
-//                    mPager01.setCurrentItem(position);
-//                }
-//            }
-//            @Override
-//            public void onPageSelected(int position) {
-//                super.onPageSelected(position);
-//                mIndicator01.animatePageSelected(position % num_page01);
-//            }
-//        });
+        mPager01.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                if (positionOffsetPixels == 0) {
+                    mPager01.setCurrentItem(position);
+                }
+            }
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                mIndicator01.animatePageSelected(position % num_page01);
+            }
+        });
 
         goToShoppingMain = (Button) findViewById(R.id.goToShoppingMain);
         goToShoppingMain.setOnClickListener(new View.OnClickListener() {

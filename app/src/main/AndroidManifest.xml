@@ -13,9 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GreeningApp">
-<!--        <activity-->
-<!--            android:name=".TestSearchActivity"-->
-<!--            android:exported="false" />-->
+        <activity
+            android:name=".ReviewHistoryActivity"
+            android:exported="false" />
+        <!-- <activity -->
+        <!-- android:name=".TestSearchActivity" -->
+        <!-- android:exported="false" /> -->
         <activity
             android:name=".PointHistoryActivity"
             android:exported="false" />

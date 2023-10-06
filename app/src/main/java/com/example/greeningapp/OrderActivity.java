@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,6 +70,8 @@ public class OrderActivity extends AppCompatActivity {
 
     Button btnPayment;
 
+    private ImageButton navMain, navCategory, navDonation, navMypage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,7 +127,6 @@ public class OrderActivity extends AppCompatActivity {
                 userSPoint = user.getSpoint();
             }
 
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 // 디비를 가져오던 중 에러 발생 시
@@ -148,8 +150,6 @@ public class OrderActivity extends AppCompatActivity {
                     total += cart.getTotalPrice();
                     Log.d("OrderActivity", total+"");
                     overTotalAmount.setText(String.valueOf(total));
-
-
                 }
                 adapter.notifyDataSetChanged(); // 리스트 저장 및 새로고침
             }
@@ -173,12 +173,38 @@ public class OrderActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼, 디폴트로 true만 해도 백버튼이 생김
 
         List<Cart> list = (ArrayList<Cart>) getIntent().getSerializableExtra("itemList");
-
         btnPayment = (Button) findViewById(R.id.btnPayment);
 
         btnPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                databaseReference2.child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        User user = snapshot.getValue(User.class);
+                        final HashMap<String, Object> pointMap = new HashMap<>();
+                        pointMap.put("pointName", "씨드 적립 - 상품 구매");
+                        pointMap.put("pointDate", getTime());
+                        pointMap.put("type", "savepoint");
+                        pointMap.put("point", total * 0.01);
+                        pointMap.put("userName", user.getUsername());
+
+                        String pointID = databaseReference.child(firebaseUser.getUid()).child("MyPoint").push().getKey();
+
+                        databaseReference.child(firebaseUser.getUid()).child("MyPoint").child(pointID).setValue(pointMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(OrderActivity.this, "상품 구매 포인트 내역 저장" , Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
                 if (list != null && list.size() > 0) {
                     for (Cart model : list) {
@@ -202,7 +228,6 @@ public class OrderActivity extends AppCompatActivity {
                         cartMap.put("doReview", "No");
                         cartMap.put("orderImg", model.getProductImg());
                         cartMap.put("eachOrderedId", eachOrderedId);
-
 
                         // 결제 된 재고만큼 기존 재고에서 변경한 값을 변수에 저장
                         int totalStock = model.getProductStock() - Integer.valueOf(model.getTotalQuantity());
@@ -248,11 +273,8 @@ public class OrderActivity extends AppCompatActivity {
 //                                        Toast.makeText(OrderActivity.this, "쇼핑 포인트 지급 완료", Toast.LENGTH_SHORT).show();
                                     }
                                 });
-
-
                             }
                         });
-
                         // 주문 완료 페이지에서 현재 주문에 대한 데이터베이스를 가져오기 위해 id를 OrderCompleteActivity에 넘겨줌
                         Intent intent = new Intent(OrderActivity.this, OrderCompleteActivity.class);
                         intent.putExtra("orderId", orderId);
@@ -265,6 +287,48 @@ public class OrderActivity extends AppCompatActivity {
 
                 }
 
+            }
+        });
+
+        navMain = findViewById(R.id.navMain_order);
+        navCategory = findViewById(R.id.navCategory_order);
+        navDonation = findViewById(R.id.navDonation_order);
+        navMypage = findViewById(R.id.navMypage_order);
+
+        // 각 아이콘 클릭 이벤트 처리
+        navMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 홈 아이콘 클릭 시 처리할 내용
+                Intent intent = new Intent(OrderActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        navCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 카테고리 아이콘 클릭 시 처리할 내용
+                Intent intent = new Intent(OrderActivity.this, CategoryActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        navDonation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 기부 아이콘 클릭 시 처리할 내용
+                Intent intent = new Intent(OrderActivity.this, DonationMainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        navMypage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 마이페이지 아이콘 클릭 시 처리할 내용
+                Intent intent = new Intent(OrderActivity.this, MyPageActivity.class);
+                startActivity(intent);
             }
         });
 
