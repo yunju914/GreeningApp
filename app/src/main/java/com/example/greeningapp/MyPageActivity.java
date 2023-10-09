@@ -15,6 +15,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,6 +31,7 @@ public class MyPageActivity extends AppCompatActivity implements View.OnClickLis
     private DatabaseReference mDatabaseRef;
     Toolbar toolbar;
 
+    private BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +50,36 @@ public class MyPageActivity extends AppCompatActivity implements View.OnClickLis
         Tv_my_name = findViewById(R.id.my_name);
         myPageSeed = (TextView) findViewById(R.id.myPageSeed);
 
+        // 하단바 구현
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigation);
+        // 초기 선택 항목 설정
+        bottomNavigationView.setSelectedItemId(R.id.tab_mypage);
+
+        // BottomNavigationView의 아이템 클릭 리스너 설정
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.tab_home) {
+                    // Home 액티비티로 이동
+                    startActivity(new Intent(MyPageActivity.this, MainActivity.class));
+                    return true;
+                } else if (item.getItemId() == R.id.tab_shopping) {
+                    // Category 액티비티로 이동
+                    startActivity(new Intent(MyPageActivity.this, CategoryActivity.class));
+                    return true;
+                } else if (item.getItemId() == R.id.tab_donation) {
+                    // Donation 액티비티로 이동
+                    startActivity(new Intent(MyPageActivity.this, DonationMainActivity.class));
+                    return true;
+                } else if (item.getItemId() == R.id.tab_mypage) {
+                    // My Page 액티비티로 이동
+                    startActivity(new Intent(MyPageActivity.this, MyPageActivity.class));
+                    return true;
+                }
+                return false;
+            }
+        });
+        
         // 사용자 정보 가져오기, 이름 표시
         FirebaseUser user = mFirebaseAuth.getCurrentUser();
         if (user != null) {
