@@ -11,7 +11,7 @@
         android:id="@+id/toolbar"
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="65dp"
         android:background="@color/white"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme">
@@ -154,21 +154,20 @@
 
     </ScrollView>
 
-    <LinearLayout
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom"
-        android:orientation="horizontal">
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"/>
 
-        <androidx.appcompat.widget.AppCompatButton
+
+    <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/save_btn"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_margin="8dp"
-            android:textColor="@color/white"
             android:background="@drawable/custom_btn"
-            android:text="저장하기" />
-
-
-    </LinearLayout>
+            android:text="저장하기"
+            android:textColor="@color/white" />
 </LinearLayout>

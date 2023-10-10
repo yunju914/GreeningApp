@@ -89,7 +89,7 @@ public class MyPageActivity extends AppCompatActivity implements View.OnClickLis
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        String name = dataSnapshot.child("username").getValue(String.class) + "님! 안녕하세요" ; // "님"을 추가하여 표시 이름 생성;
+                        String name = dataSnapshot.child("username").getValue(String.class) + "님" ; // "님"을 추가하여 표시 이름 생성;
                         Tv_my_name.setText(name);
                         String Seed = String.valueOf(dataSnapshot.child("spoint").getValue()) + "씨드";
                         myPageSeed.setText(Seed);
@@ -124,8 +124,11 @@ public class MyPageActivity extends AppCompatActivity implements View.OnClickLis
         ImageButton ChangeBtn = findViewById(R.id.change_move);
         ChangeBtn.setOnClickListener(this);
 
-        ImageButton orderBtn = findViewById(R.id.jmny_move);
+        ImageButton orderBtn = findViewById(R.id.orderhistory_move);
         orderBtn.setOnClickListener(this);
+
+        ImageButton ReviewBtn = findViewById(R.id.hg_move);
+        ReviewBtn.setOnClickListener(this);
 
         ImageButton withdrawalBtn = findViewById(R.id.tt_move);
         withdrawalBtn.setOnClickListener(this);
@@ -166,7 +169,7 @@ public class MyPageActivity extends AppCompatActivity implements View.OnClickLis
             intent = new Intent(MyPageActivity.this, ChangeActivity.class);
             startActivity(intent);
 
-        } else if (id == R.id.jmny_move) {
+        } else if (id == R.id.orderhistory_move) {
             intent = new Intent(MyPageActivity.this, OrderHistoryActivity.class);
             startActivity(intent);
 
