@@ -3,7 +3,6 @@ package com.example.greeningapp;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +13,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,20 +29,20 @@ public class ChangeActivity extends AppCompatActivity {
     private DatabaseReference mDatabaseRef; // 실시간 데이터베이스
     private EditText mEtName, mEtPostcode, mEtAddress, mEtEmail, mEtPhone;
     private Button mBtnSave;
-
-    Toolbar toolbar;
+    private ImageButton backButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change);
 
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        // 액션바 숨기기
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowTitleEnabled(false);//기본 제목 삭제.
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.baseline_arrow_back_24); //
+        if (actionBar != null) {
+            actionBar.hide();
+        }
+
+        backButton = findViewById(R.id.back_ic);
 
         Button resetPwButton = findViewById(R.id.btnPassword);
         resetPwButton.setOnClickListener(new View.OnClickListener() {
@@ -53,6 +51,16 @@ public class ChangeActivity extends AppCompatActivity {
                 setUpdatePasswordBtn();
             }
         });
+
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                finish();
+            }
+        });
+        //뒤로가기
 
         mFirebaseAuth = FirebaseAuth.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("User");
@@ -119,18 +127,18 @@ public class ChangeActivity extends AppCompatActivity {
             userRef.child("address").setValue(address);
 
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("회원정보 수정완료");
-        builder.setMessage("회원정보가 성공적으로 수정되었습니다");
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("회원정보 수정완료");
+            builder.setMessage("회원정보가 성공적으로 수정되었습니다");
 
-        builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Intent intent = new Intent(ChangeActivity.this, MyPageActivity.class);
-                startActivity(intent);
-            }
-        });
-        builder.show();
+            builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    Intent intent = new Intent(ChangeActivity.this, MyPageActivity.class);
+                    startActivity(intent);
+                }
+            });
+            builder.show();
         }
     }
     private void setUpdatePasswordBtn() {
@@ -186,16 +194,6 @@ public class ChangeActivity extends AppCompatActivity {
         } else {
             // 사용자가 로그인하지 않음
             return null;
-        }
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int itemId = item.getItemId();
-        if (itemId == android.R.id.home) { //뒤로가기
-            onBackPressed();
-            return true;
-        } else {
-            return super.onOptionsItemSelected(item);
         }
     }
 }

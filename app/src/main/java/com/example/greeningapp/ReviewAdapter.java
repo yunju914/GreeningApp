@@ -8,16 +8,12 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.CustomViewHolder>{
     private ArrayList<Review> dataList;

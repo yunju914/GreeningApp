@@ -39,12 +39,12 @@ public class OrderCompleteAdapter extends RecyclerView.Adapter<OrderCompleteAdap
 
     @NonNull
     @Override
-    public OrderCompleteAdapter.OrderCompleteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public OrderCompleteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new OrderCompleteViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.order_item, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull OrderCompleteAdapter.OrderCompleteViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull OrderCompleteViewHolder holder, int position) {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("CurrentUser");
 

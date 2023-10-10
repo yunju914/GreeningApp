@@ -79,7 +79,7 @@ public class MyPageActivity extends AppCompatActivity implements View.OnClickLis
                 return false;
             }
         });
-        
+
         // 사용자 정보 가져오기, 이름 표시
         FirebaseUser user = mFirebaseAuth.getCurrentUser();
         if (user != null) {
@@ -89,16 +89,16 @@ public class MyPageActivity extends AppCompatActivity implements View.OnClickLis
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        String name = dataSnapshot.child("username").getValue(String.class) + "님"; // "님"을 추가하여 표시 이름 생성;
+                        String name = dataSnapshot.child("username").getValue(String.class) + "님! 안녕하세요" ; // "님"을 추가하여 표시 이름 생성;
                         Tv_my_name.setText(name);
-                        String Seed = String.valueOf(dataSnapshot.child("spoint").getValue()) + "씨드"; // "님"을 추가하여 표시 이름 생성;
+                        String Seed = String.valueOf(dataSnapshot.child("spoint").getValue()) + "씨드";
                         myPageSeed.setText(Seed);
                     }
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Toast.makeText(MyPageActivity.this, "회원정보를 불러오는데에 실패했습니다.", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(MyPageActivity.this, "회원정보를 불러오는데에 실패했습니다.", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -149,25 +149,34 @@ public class MyPageActivity extends AppCompatActivity implements View.OnClickLis
         if (id == R.id.pn_move) {
             intent = new Intent(MyPageActivity.this, PointHistoryActivity.class);
             startActivity(intent);
+
         } else if (id == R.id.cc_move) {
             intent = new Intent(MyPageActivity.this, AttendanceActivity.class);
             startActivity(intent);
+
         }else if (id == R.id.qz_move) {
             intent = new Intent(MyPageActivity.this, QuizActivity.class);
             startActivity(intent);
+
         } else if (id == R.id.gv_move) {
             intent = new Intent(MyPageActivity.this, DonationCertificateActivity.class);
             startActivity(intent);
+
         } else if (id == R.id.change_move) {
             intent = new Intent(MyPageActivity.this, ChangeActivity.class);
             startActivity(intent);
+
         } else if (id == R.id.jmny_move) {
-            intent = new Intent(MyPageActivity.this, ReviewWriteActivity.class);
+            intent = new Intent(MyPageActivity.this, OrderHistoryActivity.class);
             startActivity(intent);
+
+        } else if (id == R.id.hg_move) {
+            intent = new Intent(MyPageActivity.this, ReviewHistoryActivity.class);
+            startActivity(intent);
+
         } else if (id == R.id.tt_move) {
             intent = new Intent(MyPageActivity.this, WithdrawalActivity.class);
             startActivity(intent);
-            //이용 약관 보류
         }
     }
 

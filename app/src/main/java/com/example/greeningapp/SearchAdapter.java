@@ -1,5 +1,4 @@
 package com.example.greeningapp;
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -20,7 +19,7 @@ import java.util.ArrayList;
 public class SearchAdapter extends FirebaseRecyclerAdapter<Product, SearchAdapter.myviewholder> {
     private ArrayList<Product> arrayList;
     private Context context;
-        public SearchAdapter(@NonNull FirebaseRecyclerOptions<Product> options) {
+    public SearchAdapter(@NonNull FirebaseRecyclerOptions<Product> options) {
         super(options);
     }
 

@@ -1,6 +1,5 @@
 package com.example.greeningapp;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,8 +24,8 @@ public class mainslide01_Fg4 extends Fragment{
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(getActivity(), CategoryActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), CategoryActivity.class);
+//                startActivity(intent);
             }
         });
 

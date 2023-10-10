@@ -1,6 +1,7 @@
 package com.example.greeningapp;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-import android.content.Context;
 
 import java.util.List;
 
@@ -36,14 +34,14 @@ public class PointHistoryAdapter extends RecyclerView.Adapter<PointHistoryAdapte
 
     @NonNull
     @Override
-    public PointHistoryAdapter.PointHistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PointHistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_list_point_list, parent, false);
         PointHistoryViewHolder holder = new PointHistoryViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PointHistoryAdapter.PointHistoryViewHolder holder, @SuppressLint("recyclerview_pointHistory") int position) {
+    public void onBindViewHolder(@NonNull PointHistoryViewHolder holder, @SuppressLint("recyclerview_pointHistory") int position) {
         MyPoint myPoint = pointHistoryList.get(position);
 
         if (myPoint.getType().equals("savepoint")) {
