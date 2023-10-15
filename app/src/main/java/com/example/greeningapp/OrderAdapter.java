@@ -11,13 +11,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHolder> {
 
     Context context;
     List<Cart> cartList;
+
+    DecimalFormat decimalFormat = new DecimalFormat("###,###");
 
     public OrderAdapter(Context context, List<Cart> cartList) {
         this.context = context;
@@ -26,18 +31,18 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderViewHol
 
     @NonNull
     @Override
-    public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public OrderAdapter.OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new OrderViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.order_item, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull OrderViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull OrderAdapter.OrderViewHolder holder, int position) {
         Glide.with(holder.itemView)
                 .load(cartList.get(position).getProductImg())
                 .into(holder.pimg_orderitem);
         holder.pName_orderitem.setText(cartList.get(position).getProductName());
-        holder.pPrice_orderitem.setText(String.valueOf(cartList.get(position).getTotalPrice()));
-        holder.pQauntity_orderitem.setText(cartList.get(position).getTotalQuantity() + "개");
+        holder.pPrice_orderitem.setText(String.valueOf(decimalFormat.format(cartList.get(position).getTotalPrice())) + "원");
+        holder.pQauntity_orderitem.setText(decimalFormat.format(cartList.get(position).getSelectedQuantity()) + "개");
     }
 
     @Override

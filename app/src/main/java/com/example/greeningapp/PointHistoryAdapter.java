@@ -1,7 +1,6 @@
 package com.example.greeningapp;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import android.content.Context;
+
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class PointHistoryAdapter extends RecyclerView.Adapter<PointHistoryAdapter.PointHistoryViewHolder> {
@@ -25,6 +28,10 @@ public class PointHistoryAdapter extends RecyclerView.Adapter<PointHistoryAdapte
     FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
 
+    // 숫자에 콤마
+    DecimalFormat decimalFormat = new DecimalFormat("###,###");
+
+
     public PointHistoryAdapter(Context context, List<MyPoint> pointHistoryList) {
         this.context = context;
         this.pointHistoryList = pointHistoryList;
@@ -34,25 +41,29 @@ public class PointHistoryAdapter extends RecyclerView.Adapter<PointHistoryAdapte
 
     @NonNull
     @Override
-    public PointHistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public PointHistoryAdapter.PointHistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_list_point_list, parent, false);
         PointHistoryViewHolder holder = new PointHistoryViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PointHistoryViewHolder holder, @SuppressLint("recyclerview_pointHistory") int position) {
+    public void onBindViewHolder(@NonNull PointHistoryAdapter.PointHistoryViewHolder holder, @SuppressLint("recyclerview_pointHistory") int position) {
         MyPoint myPoint = pointHistoryList.get(position);
 
         if (myPoint.getType().equals("savepoint")) {
-            holder.pointIcon.setImageResource(R.drawable.savep); // "savepoint"에 해당하는 이미지
+            holder.pointTextView.setText(String.valueOf(decimalFormat.format(myPoint.getPoint())) + "씨드가 적립되었습니다.");
         } else if (myPoint.getType().equals("usepoint")) {
-            holder.pointIcon.setImageResource(R.drawable.usep); // "usepoint"에 해당하는 이미지
+            holder.pointTextView.setText(String.valueOf(decimalFormat.format(myPoint.getPoint())) + "씨드가 기부 완료되었습니다.");
         }
 
-        holder.pointNameTextView.setText(myPoint.getPointName());
+        String pointNameTextView = myPoint.getPointName();
+        if (pointNameTextView.length() > 21) {
+            pointNameTextView = pointNameTextView.substring(0, 21) + "…";
+        }
+
+        holder.pointNameTextView.setText(pointNameTextView);
         holder.pointDateTextView.setText(myPoint.getPointDate());
-        holder.pointTextView.setText(String.valueOf(myPoint.getPoint()) + "씨드");
     }
 
     @Override
@@ -67,7 +78,7 @@ public class PointHistoryAdapter extends RecyclerView.Adapter<PointHistoryAdapte
         private TextView pointNameTextView;
         private TextView pointDateTextView;
         private TextView pointTextView;
-        private ImageView pointIcon;
+        private ImageView pointListFigure;
 
         public PointHistoryViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -75,7 +86,7 @@ public class PointHistoryAdapter extends RecyclerView.Adapter<PointHistoryAdapte
             pointNameTextView = itemView.findViewById(R.id.pointNameTextView);
             pointDateTextView = itemView.findViewById(R.id.pointDateTextView);
             pointTextView = itemView.findViewById(R.id.pointTextView);
-            pointIcon = itemView.findViewById(R.id.pointIcon);
+            pointListFigure = itemView.findViewById(R.id.pointlistfigure);
         }
 
         public void bind(MyPoint myPoint) {

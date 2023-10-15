@@ -2,6 +2,7 @@ package com.example.greeningapp;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -20,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
@@ -31,6 +34,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     FirebaseDatabase firebaseDatabase;
     FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
+
+    DecimalFormat decimalFormat = new DecimalFormat("###,###");
 
     int totalPrice = 0;
 
@@ -44,12 +49,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     @NonNull
     @Override
-    public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CartAdapter.CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new CartViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_item, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CartViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull CartAdapter.CartViewHolder holder, @SuppressLint("RecyclerView") int position) {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("CurrentUser");
         String cartID = databaseReference.push().getKey();
@@ -58,9 +63,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 .load(cartList.get(position).getProductImg())
                 .into(holder.productImg);
         holder.name.setText(cartList.get(position).getProductName());
-        holder.price.setText(cartList.get(position).getProductPrice());
-        holder.quantity.setText(cartList.get(position).getTotalQuantity());
-        holder.totalPrice.setText(String.valueOf(cartList.get(position).getTotalPrice()));
+        holder.price.setText(decimalFormat.format(Integer.parseInt(cartList.get(position).getProductPrice())) + "원");
+        holder.quantity.setText(decimalFormat.format(cartList.get(position).getSelectedQuantity()) +"개");
+        holder.totalPrice.setText(String.valueOf(decimalFormat.format(cartList.get(position).getTotalPrice())) + "원");
 
         holder.deleteItem.setOnClickListener(new View.OnClickListener() {
             @Override

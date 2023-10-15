@@ -1,16 +1,20 @@
 package com.example.greeningapp;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.ImageButton;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
@@ -21,6 +25,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class DonationMainActivity extends AppCompatActivity {
 
@@ -44,6 +51,9 @@ public class DonationMainActivity extends AppCompatActivity {
 
 
     private ImageButton navMain, navCategory, navDonation, navMypage;
+
+
+    DecimalFormat decimalFormat = new DecimalFormat("###,###");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,7 +114,7 @@ public class DonationMainActivity extends AppCompatActivity {
                 // 회원 정보 테이블에서 sPoint 데이터 가져와서 뿌리기
 
                 User user = dataSnapshot.getValue(User.class); //  만들어 뒀던 Product 객체에 데이터를 담는다.
-                donationPoint.setText(user.getSpoint() + " 씨드");
+                donationPoint.setText(decimalFormat.format(user.getSpoint()) + " 씨드");
 
             }
 
@@ -198,5 +208,15 @@ public class DonationMainActivity extends AppCompatActivity {
 //            }
 //        });
 
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        if (itemId == android.R.id.home) { //뒤로가기
+            onBackPressed();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 }
