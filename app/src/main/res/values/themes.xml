@@ -3,7 +3,7 @@
     <style name="Base.Theme.GreeningApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
-        <item name="colorPrimary">@color/btn</item>
+        <item name="colorPrimary">@color/mainColor</item>
         <item name="colorPrimaryVariant">@color/green_Color</item>
         <item name="colorOnPrimary">@color/toolbar</item>
         <item name="colorSecondary">@color/green_Color</item>

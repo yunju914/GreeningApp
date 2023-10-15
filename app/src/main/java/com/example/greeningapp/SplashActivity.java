@@ -20,7 +20,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         IntroLogo = (ImageView) findViewById(R.id.introLogo);
-        Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+//        Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
 
 
 //        animation.setAnimationListener(new Animation.AnimationListener() {
