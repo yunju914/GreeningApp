@@ -44,12 +44,12 @@ public class WithdrawalActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);//기본 제목 삭제.
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.baseline_arrow_back_24);
 
         ///다이얼로그
         dialog = new Dialog(WithdrawalActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.customdialog);
+        dialog.setContentView(R.layout.dialog_confirm);
 
 
         // XML 레이아웃의 요소와 연결
@@ -82,26 +82,26 @@ public class WithdrawalActivity extends AppCompatActivity {
                 if (radioButton.isChecked()) {
                     showConfirmationDialog();
                 } else {
-//                   showFaildialog() {
+                   showFaildialog();
                 }
             }
         });
     }
-//    public void showFaildialog() {
-//        dialog.show();
-//
-//        TextView confirmTextView = dialog.findViewById(R.id.confirmTextView);
-//        confirmTextView.setText("동의해야 회원탈퇴가 가능합니다.");
-//
-//        Button btnOk = dialog.findViewById(R.id.btn_ok);
-//        btnOk.setText("확인");
-//        btnOk.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                dialog.dismiss();
-//            }
-//        });
-//    }
+    public void showFaildialog() {
+        dialog.show();
+
+        TextView confirmTextView = dialog.findViewById(R.id.confirmTextView);
+        confirmTextView.setText("유의사항 확인 후 동의하셔야 회원탈퇴가 가능합니다.");
+
+        Button btnOk = dialog.findViewById(R.id.btn_ok);
+        btnOk.setText("확인");
+        btnOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
     // 팝업 창 표시
     private void showConfirmationDialog() {
         dialog.show();
@@ -164,7 +164,19 @@ public class WithdrawalActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 // 계정 삭제가 성공한 경우
-                                Toast.makeText(WithdrawalActivity.this, "계정이 성공적으로 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                                dialog.show();
+
+                                    TextView confirmTextView = dialog.findViewById(R.id.confirmTextView);
+                                    confirmTextView.setText("계정이 성공적으로 삭제되었습니다..");
+
+                                    Button btnOk = dialog.findViewById(R.id.btn_ok);
+                                    btnOk.setText("확인");
+                                    btnOk.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            dialog.dismiss();
+                                        }
+                                    });
                                 Intent intent = new Intent(WithdrawalActivity.this, LoginActivity.class);
                                 startActivity(intent);
 

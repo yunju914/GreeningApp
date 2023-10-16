@@ -14,11 +14,14 @@ import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class SearchAdapter extends FirebaseRecyclerAdapter<Product, SearchAdapter.myviewholder> {
     private ArrayList<Product> arrayList;
     private Context context;
+
+    DecimalFormat decimalFormat = new DecimalFormat("###,###");
     public SearchAdapter(@NonNull FirebaseRecyclerOptions<Product> options) {
         super(options);
     }
@@ -27,7 +30,7 @@ public class SearchAdapter extends FirebaseRecyclerAdapter<Product, SearchAdapte
     protected void onBindViewHolder(@NonNull myviewholder holder, int position, @NonNull Product product) {
         holder.pname.setText(getItem(position).getPname());
         holder.psay.setText(getItem(position).getPsay());
-        holder.pprice.setText(String.valueOf(getItem(position).getPprice()));
+        holder.pprice.setText(String.valueOf(decimalFormat.format(getItem(position).getPprice())) + "원");
         Glide.with(holder.pimg.getContext()).load(getItem(position).getPimg()).into(holder.pimg);
     }
 

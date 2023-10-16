@@ -45,7 +45,6 @@ public class MyPageActivity extends AppCompatActivity implements View.OnClickLis
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);//기본 제목 삭제.
         actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setHomeAsUpIndicator(R.drawable.baseline_arrow_back_24);
 
         dialog = new Dialog(MyPageActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
