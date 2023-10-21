@@ -1,4 +1,10 @@
 package com.example.greeningapp;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -11,13 +17,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -47,7 +47,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 
     ImageView detailedImg;
     ImageView detailedLongImg;
-    TextView price, description, stock, name;
+    TextView price, stock, name;
     Button addToCart, buyNow;
     ImageView addItem, removeItem;
 
@@ -73,9 +73,8 @@ public class ProductDetailActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar_product_detail);
         setSupportActionBar(toolbar);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowTitleEnabled(false);//기본 제목 삭제.
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         dialog = new Dialog(ProductDetailActivity.this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -104,6 +103,9 @@ public class ProductDetailActivity extends AppCompatActivity {
         stock = findViewById(R.id.detail_stock);
 
         name = findViewById(R.id.detailed_name);
+
+        // 숫자에 콤마 표시
+        DecimalFormat decimalFormat = new DecimalFormat("###,###");
 
         // 하단바 구현
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigation_productDetail);
@@ -136,15 +138,18 @@ public class ProductDetailActivity extends AppCompatActivity {
             }
         });
 
+//        totalQuantity = Integer.parseInt(quantity.getText().toString());
+
         if (product != null) {
             Glide.with(getApplicationContext()).load(product.getPimg()).into(detailedImg);
 //            description.setText(product.getDescription());
-            price.setText(String.valueOf(product.getPprice()));
+            price.setText(String.valueOf(decimalFormat.format(product.getPprice())) + "원");
             stock.setText("( 재고: " + String.valueOf(product.getStock()) + " )");
             name.setText(product.getPname());
             Glide.with(getApplicationContext()).load(product.getPdetailimg()).into(detailedLongImg);
 
             totalPrice= product.getPprice() * totalQuantity;
+            decimalFormat.format(totalPrice);
 
             pid = product.getPid();
         }
@@ -182,8 +187,6 @@ public class ProductDetailActivity extends AppCompatActivity {
             }
         });
 
-
-
         adapter = new ReviewAdapter(arrayList, this);
         recyclerView.setAdapter(adapter);
 
@@ -206,8 +209,8 @@ public class ProductDetailActivity extends AppCompatActivity {
                 final HashMap<String, Object> cartMap = new HashMap<>();
                 FirebaseUser firebaseUser = auth.getCurrentUser();
                 cartMap.put("productName", product.getPname());
-                cartMap.put("productPrice", price.getText().toString());
-                cartMap.put("totalQuantity", quantity.getText().toString());
+                cartMap.put("productPrice", String.valueOf(product.getPprice()));
+                cartMap.put("selectedQuantity", totalQuantity);
                 cartMap.put("totalPrice", totalPrice * totalQuantity);
                 cartMap.put("pId", product.getPid());
                 cartMap.put("productImg", product.getPimg());
@@ -234,8 +237,8 @@ public class ProductDetailActivity extends AppCompatActivity {
 
                 Bundle bundle = new Bundle();
                 bundle.putString("productName", product.getPname());
-                bundle.putString("productPrice", price.getText().toString());
-                bundle.putString("totalQuantity", quantity.getText().toString());
+                bundle.putString("productPrice", String.valueOf(product.getPprice()));
+                bundle.putInt("selectedQuantity", totalQuantity);
                 bundle.putInt("totalPrice", totalPrice * totalQuantity);
                 bundle.putInt("pId", product.getPid());
                 bundle.putString("productImg", product.getPimg());
@@ -268,14 +271,12 @@ public class ProductDetailActivity extends AppCompatActivity {
     @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId ()) {
-            case android.R.id.home:
-                Intent intent = new Intent(ProductDetailActivity.this, CategoryActivity.class);
-                startActivity(intent);
-                finish ();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
+        int itemId = item.getItemId();
+        if (itemId == android.R.id.home) { //뒤로가기
+            onBackPressed();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
     }
 

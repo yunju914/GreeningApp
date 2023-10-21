@@ -20,7 +20,13 @@
         <!-- android:name=".TestSearchActivity" -->
         <!-- android:exported="false" /> -->
         <activity
+            android:name=".SplashActivity"
+            android:exported="false" />
+        <activity
             android:name=".PointHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TermsOfUseActivity"
             android:exported="false" />
         <activity
             android:name=".ChangeActivity"
