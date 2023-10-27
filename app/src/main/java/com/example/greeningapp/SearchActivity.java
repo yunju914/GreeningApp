@@ -17,8 +17,6 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.DecimalFormat;
-
 public class SearchActivity extends AppCompatActivity {
 
     //    private FirebaseDatabase database;

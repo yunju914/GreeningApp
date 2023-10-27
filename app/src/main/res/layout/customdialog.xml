@@ -8,7 +8,7 @@
     android:gravity="center"
     android:minWidth="300dp"
     >
-   <TextView
+    <TextView
         android:id="@+id/say"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

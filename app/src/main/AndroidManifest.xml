@@ -14,19 +14,49 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GreeningApp">
         <activity
-            android:name=".ReviewHistoryActivity"
-            android:exported="false" />
-        <!-- <activity -->
-        <!-- android:name=".TestSearchActivity" -->
-        <!-- android:exported="false" /> -->
-        <activity
-            android:name=".SplashActivity"
+            android:name=".ManageUserOrderDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".PointHistoryActivity"
+            android:name=".ManageUserReviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManageUserOrderActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManageUserDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManageUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManageProductDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManageAddProductActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManagerMainActivity"
             android:exported="false" />
         <activity
             android:name=".TermsOfUseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ReviewHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OrderHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PointHistoryActivity"
             android:exported="false" />
         <activity
             android:name=".ChangeActivity"
@@ -39,6 +69,9 @@
             android:exported="false" />
         <activity
             android:name=".AttendanceActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SearchActivity"
             android:exported="false" />
         <activity
             android:name=".CategoryActivity"
@@ -89,23 +122,11 @@
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".SearchActivity"
-            android:exported="false" />
-        <activity
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".OrderHistoryActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="false" />
     </application>
 
 </manifest>

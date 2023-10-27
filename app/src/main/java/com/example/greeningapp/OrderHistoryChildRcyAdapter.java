@@ -3,7 +3,7 @@ package com.example.greeningapp;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
+import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.greeningapp.R;
-import com.example.greeningapp.ReviewActivity;
-import com.example.greeningapp.ReviewWriteActivity;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -47,15 +41,27 @@ public class OrderHistoryChildRcyAdapter extends RecyclerView.Adapter<OrderHisto
                 .load(childModelArrayList.get(position).getOrderImg())
                 .into(holder.orderhistory_img);
         holder.pro_name.setText(childModelArrayList.get(position).getProductName());
-        holder.pro_price.setText(childModelArrayList.get(position).getProductPrice());
+        holder.pro_price.setText(childModelArrayList.get(position).getProductPrice() + "원");
         holder.ordervalue.setText(childModelArrayList.get(position).getTotalQuantity() + "개");
+
+        String state = childModelArrayList.get(position).getOrderstate();
+
+        if("paid".equals(state)){
+            holder.OrderState_orderhistory.setText("결제 완료");
+            holder.ordhreviewBtn.setVisibility(View.INVISIBLE);
+        } else if("shipped".equals(state)){
+            holder.OrderState_orderhistory.setText("배송 완료");
+            holder.ordhreviewBtn.setVisibility(View.VISIBLE);
+        }
 
         String isReviewCompleted = childModelArrayList.get(position).getDoReview();
 
         if ("No".equals(isReviewCompleted)) {
 
         } else if ("Yes".equals(isReviewCompleted)) {
-            holder.ordhreviewBtn.setText("작성 완료");
+            holder.ordhreviewBtn.setText("후기 작성완료");
+            holder.ordhreviewBtn.setBackgroundTintList(ColorStateList.valueOf(cxt.getResources().getColor(R.color.ordh_btn_click))); //버튼색변경
+            holder.ordhreviewBtn.setTextColor(cxt.getResources().getColor(R.color.white)); // 글자색 변경
             holder.ordhreviewBtn.setEnabled(false);
         }
 
@@ -87,6 +93,8 @@ public class OrderHistoryChildRcyAdapter extends RecyclerView.Adapter<OrderHisto
         public ImageView orderhistory_img;
         public TextView pro_name, pro_price, ordervalue;
 
+        TextView OrderState_orderhistory;
+
         AppCompatButton ordhreviewBtn;
 
         public ChildViewHolder(View itemView) {
@@ -96,6 +104,7 @@ public class OrderHistoryChildRcyAdapter extends RecyclerView.Adapter<OrderHisto
             pro_price = itemView.findViewById(R.id.pro_price);
             ordervalue = itemView.findViewById(R.id.ordervalue);
             ordhreviewBtn = itemView.findViewById(R.id.ordhreviewBtn);
+            this.OrderState_orderhistory = itemView.findViewById(R.id.OrderState_orderhistory);
         }
     }
 }

@@ -8,10 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -49,12 +47,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     @NonNull
     @Override
-    public CartAdapter.CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CartViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new CartViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_item, parent, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CartAdapter.CartViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull CartViewHolder holder, @SuppressLint("RecyclerView") int position) {
         FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
         databaseReference = FirebaseDatabase.getInstance().getReference("CurrentUser");
         String cartID = databaseReference.push().getKey();
@@ -79,10 +77,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                                 if (task.isSuccessful()) {
                                     cartList.remove(cartList.get(position));
                                     notifyDataSetChanged();
-                                    ((CartActivity) context).recreate();
-                                    Toast.makeText(context, "item Delete", Toast.LENGTH_SHORT).show();
+                                    Intent intent = ((CartActivity)context).getIntent();
+                                    ((CartActivity)context).finish(); //현재 액티비티 종료 실시
+                                    ((CartActivity)context).overridePendingTransition(0, 0); //효과 없애기
+                                    ((CartActivity)context).startActivity(intent); //현재 액티비티 재실행 실시
+                                    ((CartActivity)context).overridePendingTransition(0, 0); //효과 없애기
+//                                    ((CartActivity) context).recreate();
+//                                    Toast.makeText(context, "item Delete", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(context, "Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+//                                    Toast.makeText(context, "Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });

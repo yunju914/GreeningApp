@@ -1,13 +1,13 @@
 package com.example.greeningapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -20,7 +20,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         IntroLogo = (ImageView) findViewById(R.id.introLogo);
-//        Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.fade_in);
 
 
 //        animation.setAnimationListener(new Animation.AnimationListener() {

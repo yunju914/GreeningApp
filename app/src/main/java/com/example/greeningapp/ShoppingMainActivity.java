@@ -1,15 +1,15 @@
 package com.example.greeningapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,11 +29,7 @@ public class ShoppingMainActivity extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference databaseReference;
 
-
-    private Button btnCart;
-    private Button btnDonation;
-    private Button btnMypage;
-    private Button btnQuizMain;
+    private Button btnManageMain;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +54,7 @@ public class ShoppingMainActivity extends AppCompatActivity {
                     // 반복문으로 데이터 List를 추출해냄
                     Product product = snapshot.getValue(Product.class); //  만들어 뒀던 Product 객체에 데이터를 담는다.
                     arrayList.add(product); // 담은 데이터들을 배열 리스트에 넣고 리사이클러뷰로 보낼 준비
-                    Log.d("Mainctivity3", snapshot.getKey()+"");
+                    Log.d("ShoppingMainActivity", snapshot.getKey()+"");
 
                 }
                 adapter.notifyDataSetChanged(); // 리스트 저장 및 새로고침
@@ -75,40 +71,13 @@ public class ShoppingMainActivity extends AppCompatActivity {
         adapter = new ProductAdapter(arrayList, this);
         recyclerView.setAdapter(adapter); //리사이클러뷰에 어댑터 연결
 
-        btnCart = (Button) findViewById(R.id.btnGoToCart);
-        btnCart.setOnClickListener(new View.OnClickListener() {
+
+
+        btnManageMain = (Button) findViewById(R.id.btnManageMain_shop);
+        btnManageMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ShoppingMainActivity.this, CartActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btnDonation = (Button) findViewById(R.id.btnDonation);
-        btnDonation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ShoppingMainActivity.this, DonationMainActivity.class);
-                startActivity(intent);
-
-            }
-        });
-
-        btnMypage = (Button) findViewById(R.id.btnMypage);
-        btnMypage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ShoppingMainActivity.this, AttendanceActivity.class);
-                startActivity(intent);
-
-            }
-        });
-
-        btnQuizMain = (Button) findViewById(R.id.btnQuizMain);
-        btnQuizMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ShoppingMainActivity.this, QuizActivity.class);
+                Intent intent = new Intent(ShoppingMainActivity.this, ManagerMainActivity.class);
                 startActivity(intent);
             }
         });

@@ -1,19 +1,17 @@
 package com.example.greeningapp;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,13 +34,14 @@ public class BuyNowActivity extends AppCompatActivity {
 
     long mNow;
     Date mDate;
-    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+    SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 
     FirebaseDatabase firebaseDatabase;
     FirebaseAuth firebaseAuth;
     DatabaseReference databaseReference;
     DatabaseReference databaseReference2;
     DatabaseReference databaseReferenceProduct;
+    DatabaseReference databaseReferenceAdmin;
 
     private TextView overTotalAmount;
     private TextView buynow_pname, buynow_pprice, buynow_totalprice, buynow_totalquantity;
@@ -101,13 +100,15 @@ public class BuyNowActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("CurrentUser");
         databaseReferenceProduct = FirebaseDatabase.getInstance().getReference("Product");
 
+        databaseReferenceAdmin = FirebaseDatabase.getInstance().getReference("Admin");
+
         String myOrderId = databaseReference.child("MyOrder").push().getKey();
 
         databaseReference2.child(firebaseUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 // 파이어베이스 데이터베이스의 데이터를 받아오는 곳
-//                arrayList.clear(); //기존 배열 리스트가 존재하지 않게 남아 있는 데이터 초기화
+                // arrayList.clear(); //기존 배열 리스트가 존재하지 않게 남아 있는 데이터 초기화
                 // 반복문으로 데이터 List를 추출해냄
 
                 User user = dataSnapshot.getValue(User.class); //  만들어 뒀던 Product 객체에 데이터를 담는다.
@@ -190,10 +191,19 @@ public class BuyNowActivity extends AppCompatActivity {
                 cartMap.put("orderImg", productImg);
                 cartMap.put("eachOrderedId", orderId);
                 cartMap.put("doReview", "No");
+                cartMap.put("orderstate", "paid");
+                cartMap.put("useridtoken", firebaseUser.getUid());
                 Log.d("OrderActivity1", total+"");
 
                 int totalStock = productStock - Integer.valueOf(selectedQuantity);
                 double changePoint = userSPoint + totalPrice * 0.01;
+
+                databaseReferenceAdmin.child("UserOrder").child(orderId).setValue(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Log.d("OrderActivity", "Admin 계정에 추가 완료" + orderId);
+                    }
+                });
 
 
                 databaseReference.child(firebaseUser.getUid()).child("MyOrder").child(myOrderId).child(orderId).setValue(cartMap).addOnCompleteListener(new OnCompleteListener<Void>() {
