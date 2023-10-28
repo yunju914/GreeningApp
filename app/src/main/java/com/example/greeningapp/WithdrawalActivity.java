@@ -187,7 +187,6 @@ public class WithdrawalActivity extends AppCompatActivity{
                                     }
                                 });
                                 finish();
-
                             } else {
                                 // 계정 삭제가 실패한 경우
                                 dialog2.show();

@@ -33,6 +33,7 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -49,6 +50,7 @@ public class SearchActivity extends AppCompatActivity {
 
         adapter = new SearchAdapter(options);
         recview.setAdapter(adapter);
+
         // 하단바 구현
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigation);
 
@@ -100,9 +102,11 @@ public class SearchActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.searchmenu,menu);
 
-        MenuItem item = menu.findItem(R.id.action_search);
-        SearchView searchView=(SearchView)item.getActionView();
-
+////        MenuItem item = menu.findItem(R.id.action_search);
+//        SearchView searchView=(SearchView)item.getActionView();
+        SearchView searchView = (SearchView) findViewById(R.id.search_action);
+//        searchView.requestFocus();
+        searchView.setIconified(false);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
             @Override

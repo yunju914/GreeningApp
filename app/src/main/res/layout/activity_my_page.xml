@@ -94,8 +94,7 @@
                     android:id="@+id/Main_s_j_h"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginRight="8dp">
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -114,18 +113,20 @@
                             android:text="씨드 내역"
                             android:textSize="16sp"
                             android:textStyle="bold" />
+
                         <View
-                            android:layout_width="match_parent"
+                            android:layout_width="171dp"
                             android:layout_height="match_parent"
-                            android:background="#ffffff"
-                            android:layout_weight="1"/>
+                            android:layout_weight="1"
+                            android:background="#ffffff" />
 
                         <ImageButton
                             android:id="@+id/pn_move"
-                            android:layout_width="wrap_content"
                             android:layout_gravity="right|center"
+                            android:layout_width="50dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/baseline_arrow_forward_ios_24"
+                            android:src="@drawable/baseline_arrow_forward_ios_24"
+                            android:background="@null"
                             />
                     </LinearLayout>
 
@@ -152,10 +153,11 @@
                             android:layout_weight="1"/>
                         <ImageButton
                             android:id="@+id/orderhistory_move"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:layout_gravity="right|center"
-                            android:background="@drawable/baseline_arrow_forward_ios_24" />
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/baseline_arrow_forward_ios_24"
+                            android:background="@null"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -183,9 +185,10 @@
                         <ImageButton
                             android:id="@+id/hg_move"
                             android:layout_gravity="right|center"
-                            android:layout_width="wrap_content"
+                            android:layout_width="50dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/baseline_arrow_forward_ios_24" />
+                            android:src="@drawable/baseline_arrow_forward_ios_24"
+                            android:background="@null"/>
                     </LinearLayout>
 
                     <View
@@ -193,7 +196,7 @@
                         android:layout_height="2dp"
                         android:layout_centerInParent="true"
                         android:layout_marginLeft="24dp"
-                        android:layout_marginRight="16dp"
+                        android:layout_marginRight="24dp"
                         android:background="#DADADA" />
                 </LinearLayout>
 
@@ -201,8 +204,7 @@
                     android:id="@+id/Main_c_q"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginRight="8dp">
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -228,10 +230,10 @@
                         <ImageButton
                             android:id="@+id/cc_move"
                             android:layout_gravity="right|center"
-                            android:layout_width="wrap_content"
+                            android:layout_width="50dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/baseline_arrow_forward_ios_24" />
-
+                            android:src="@drawable/baseline_arrow_forward_ios_24"
+                            android:background="@null"/>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -260,16 +262,17 @@
                         <ImageButton
                             android:id="@+id/qz_move"
                             android:layout_gravity="right|center"
-                            android:layout_width="wrap_content"
+                            android:layout_width="50dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/baseline_arrow_forward_ios_24" />
+                            android:src="@drawable/baseline_arrow_forward_ios_24"
+                            android:background="@null"/>
                     </LinearLayout>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:layout_centerInParent="true"
                         android:layout_marginLeft="24dp"
-                        android:layout_marginRight="16dp"
+                        android:layout_marginRight="24dp"
                         android:background="#DADADA" />
                 </LinearLayout>
 
@@ -277,8 +280,7 @@
                     android:id="@+id/Main_user"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginRight="8dp">
+                    android:orientation="vertical">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -304,11 +306,11 @@
 
                         <ImageButton
                             android:id="@+id/change_move"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/baseline_arrow_forward_ios_24"
                             android:layout_gravity="right|center"
-                            />
+                            android:layout_width="50dp"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/baseline_arrow_forward_ios_24"
+                            android:background="@null"    />
 
                     </LinearLayout>
 
@@ -335,11 +337,12 @@
                             android:layout_weight="1"/>
 
                         <ImageButton
-                            android:layout_gravity="right|center"
                             android:id="@+id/out_move"
-                            android:layout_width="wrap_content"
+                            android:layout_gravity="right|center"
+                            android:layout_width="50dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/baseline_arrow_forward_ios_24" />
+                            android:src="@drawable/baseline_arrow_forward_ios_24"
+                            android:background="@null"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -365,18 +368,19 @@
                             android:background="#ffffff"
                             android:layout_weight="1"/>
                         <ImageButton
-                            android:layout_gravity="right|center"
                             android:id="@+id/tt_move"
-                            android:layout_width="wrap_content"
+                            android:layout_gravity="right|center"
+                            android:layout_width="50dp"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/baseline_arrow_forward_ios_24" />
+                            android:src="@drawable/baseline_arrow_forward_ios_24"
+                            android:background="@null" />
                     </LinearLayout>
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="2dp"
                         android:layout_centerInParent="true"
                         android:layout_marginLeft="24dp"
-                        android:layout_marginRight="16dp"
+                        android:layout_marginRight="24dp"
                         android:background="#DADADA" />
                 </LinearLayout>
 
