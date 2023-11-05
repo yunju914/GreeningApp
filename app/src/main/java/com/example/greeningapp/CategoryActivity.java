@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
@@ -77,8 +78,7 @@ public class CategoryActivity extends AppCompatActivity{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        getMenuInflater().inflate(R.menu.categorymenu, menu);
+        getMenuInflater().inflate(R.menu.categorymenu,menu);
         return super.onCreateOptionsMenu(menu);
     }
     //onCreateOptionMenu : 옵션메뉴들을 생성해주는 메소드
@@ -95,9 +95,7 @@ public class CategoryActivity extends AppCompatActivity{
         } else if (itemId == R.id.action_cart) {
             startActivity(new Intent(this, CartActivity.class));
             return true;
-        } else {
-            return super.onOptionsItemSelected(item);
         }
+            return super.onOptionsItemSelected(item);
     }
-
 }

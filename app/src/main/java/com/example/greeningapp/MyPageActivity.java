@@ -24,6 +24,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DecimalFormat;
+
 public class MyPageActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView Tv_my_name, myPageSeed;
@@ -32,6 +34,8 @@ public class MyPageActivity extends AppCompatActivity implements View.OnClickLis
     Toolbar toolbar;
     Dialog dialog;
     private BottomNavigationView bottomNavigationView;
+
+    DecimalFormat decimalFormat = new DecimalFormat("###,###");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,7 +98,7 @@ public class MyPageActivity extends AppCompatActivity implements View.OnClickLis
                     if (dataSnapshot.exists()) {
                         String name = dataSnapshot.child("username").getValue(String.class) + "님" ; // "님"을 추가하여 표시 이름 생성;
                         Tv_my_name.setText(name);
-                        String Seed = String.valueOf(dataSnapshot.child("spoint").getValue()) + "씨드";
+                        String Seed = String.valueOf(decimalFormat.format(dataSnapshot.child("spoint").getValue())) + "씨드";
                         myPageSeed.setText(Seed);
                     }
                 }
