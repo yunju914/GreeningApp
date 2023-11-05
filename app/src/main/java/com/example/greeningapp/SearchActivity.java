@@ -35,7 +35,7 @@ import java.util.List;
 public class SearchActivity extends AppCompatActivity {
     private EditText searchEditText;
     private RecyclerView resultsListView;
-    private ASearchAdapter adapter;
+    private SearchAdapter adapter;
     private List<Product> searchResults = new ArrayList<>(); // 검색 결과를 저장할 리스트
 
     Toolbar toolbar;
@@ -45,7 +45,7 @@ public class SearchActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_asearch);
+        setContentView(R.layout.activity_search);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -88,7 +88,7 @@ public class SearchActivity extends AppCompatActivity {
         resultsListView = findViewById(R.id.searchRecyclerView);
         resultsListView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new ASearchAdapter(searchResults);
+        adapter = new SearchAdapter(searchResults);
         resultsListView.setAdapter(adapter);
 
         // // RecyclerView 터치 이벤트 처리
