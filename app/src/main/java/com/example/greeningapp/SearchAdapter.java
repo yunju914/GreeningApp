@@ -1,6 +1,8 @@
 package com.example.greeningapp;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +20,7 @@ import java.util.List;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.myviewholder> {
     private List<Product> searchResults;
+    Context context;
     DecimalFormat decimalFormat = new DecimalFormat("###,###");
     public SearchAdapter(List<Product> searchResults) {
         this.searchResults = searchResults;
@@ -47,6 +50,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.myviewhold
                 Intent intent = new Intent(v.getContext(), ProductDetailActivity.class);
                 intent.putExtra("detail", searchResults.get(position));
                 v.getContext().startActivity(intent);
+                ((Activity)context).finish();
             }
         });
     }
