@@ -1,9 +1,11 @@
 package com.example.greeningapp;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +13,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.greeningapp.R;
+import com.example.greeningapp.ReviewActivity;
+import com.example.greeningapp.ReviewWriteActivity;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -73,6 +81,8 @@ public class OrderHistoryChildRcyAdapter extends RecyclerView.Adapter<OrderHisto
                     intent.putExtra("product", childModelArrayList.get(position));
 //                    Log.d("myOrderId", String.valueOf(childModelArrayList.get(position)+"가져왔음"));
                     cxt.startActivity(intent);
+                    ((Activity)cxt).finish();
+
                 } else if ("Yes".equals(isReviewCompleted)) {
 
                 }

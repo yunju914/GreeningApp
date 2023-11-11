@@ -55,24 +55,27 @@ public class CategoryActivity extends AppCompatActivity{
                 if (item.getItemId() == R.id.tab_home) {
                     // Home 액티비티로 이동
                     startActivity(new Intent(CategoryActivity.this, MainActivity.class));
+                    finish();
                     return true;
                 } else if (item.getItemId() == R.id.tab_shopping) {
                     // Category 액티비티로 이동
                     startActivity(new Intent(CategoryActivity.this, CategoryActivity.class));
+                    finish();
                     return true;
                 } else if (item.getItemId() == R.id.tab_donation) {
                     // Donation 액티비티로 이동
                     startActivity(new Intent(CategoryActivity.this, DonationMainActivity.class));
+                    finish();
                     return true;
                 } else if (item.getItemId() == R.id.tab_mypage) {
                     // My Page 액티비티로 이동
                     startActivity(new Intent(CategoryActivity.this, MyPageActivity.class));
+                    finish();
                     return true;
                 }
                 return false;
             }
         });
-
     }
 
 
@@ -81,6 +84,7 @@ public class CategoryActivity extends AppCompatActivity{
         getMenuInflater().inflate(R.menu.categorymenu,menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     //onCreateOptionMenu : 옵션메뉴들을 생성해주는 메소드
     //onOptionsItemSelected : MenuItem item을 매개변수로 받아 해당하는 case의 코드를 실행
     @Override
@@ -96,6 +100,6 @@ public class CategoryActivity extends AppCompatActivity{
             startActivity(new Intent(this, CartActivity.class));
             return true;
         }
-            return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
 }

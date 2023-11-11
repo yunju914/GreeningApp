@@ -1,14 +1,14 @@
 package com.example.greeningapp;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -72,18 +72,22 @@ public class DoCertificateDetailActivity extends AppCompatActivity {
                 if (item.getItemId() == R.id.tab_home) {
                     // Home 액티비티로 이동
                     startActivity(new Intent(DoCertificateDetailActivity.this, MainActivity.class));
+                    finish();
                     return true;
                 } else if (item.getItemId() == R.id.tab_shopping) {
                     // Category 액티비티로 이동
                     startActivity(new Intent(DoCertificateDetailActivity.this, CategoryActivity.class));
+                    finish();
                     return true;
                 } else if (item.getItemId() == R.id.tab_donation) {
                     // Donation 액티비티로 이동
                     startActivity(new Intent(DoCertificateDetailActivity.this, DonationMainActivity.class));
+                    finish();
                     return true;
                 } else if (item.getItemId() == R.id.tab_mypage) {
                     // My Page 액티비티로 이동
                     startActivity(new Intent(DoCertificateDetailActivity.this, MyPageActivity.class));
+                    finish();
                     return true;
                 }
                 return false;

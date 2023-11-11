@@ -9,6 +9,10 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.greeningapp.Quiz;
+import com.example.greeningapp.QuizActivity;
+import com.example.greeningapp.ShoppingMainActivity;
+
 
 public class mainslide02_Fg2 extends Fragment{
 

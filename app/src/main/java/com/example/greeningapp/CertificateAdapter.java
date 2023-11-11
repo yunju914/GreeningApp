@@ -1,6 +1,7 @@
 package com.example.greeningapp;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -14,7 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class CertificateAdapter extends RecyclerView.Adapter<CertificateAdapter.CertificateViewHolder> {
 
@@ -29,14 +34,14 @@ public class CertificateAdapter extends RecyclerView.Adapter<CertificateAdapter.
 
     @NonNull
     @Override
-    public CertificateViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CertificateAdapter.CertificateViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.docertificate_item, parent, false);
         CertificateViewHolder holder = new CertificateViewHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CertificateViewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull CertificateAdapter.CertificateViewHolder holder, @SuppressLint("RecyclerView") int position) {
         Glide.with(holder.itemView)
                 .load(donationArrayList.get(position).getDonationimg())
                 .into(holder.doCertiImg);
@@ -50,6 +55,7 @@ public class CertificateAdapter extends RecyclerView.Adapter<CertificateAdapter.
                 Intent intent = new Intent(context, DoCertificateDetailActivity.class);
                 intent.putExtra("CertificateDetail", donationArrayList.get(position));
                 context.startActivity(intent);
+                ((Activity)context).finish();
             }
         });
     }

@@ -1,15 +1,15 @@
 package com.example.greeningapp;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,13 +20,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.ArrayList;
 
 public class PointHistoryActivity extends AppCompatActivity {
-
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private FirebaseAuth firebaseAuth;
@@ -73,7 +72,6 @@ public class PointHistoryActivity extends AppCompatActivity {
                         arrayList.add(myPoint);
                     }
 
-                    // 적립 데이터 불러올 때 날짜(pointDate)를 기준으로 내림차순 정렬
                     Collections.sort(arrayList, new Comparator<MyPoint>() {
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -88,14 +86,13 @@ public class PointHistoryActivity extends AppCompatActivity {
                             }
                         }
                     });
-
                     adapter = new PointHistoryAdapter(PointHistoryActivity.this, arrayList);
                     recyclerView.setAdapter(adapter);
                 }
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    Log.e("PointHistoryActivity, 데이터 로드 오류", String.valueOf(databaseError.toException()));
+                    Log.e("PointHistoryActivity", "데이터 로드 오류 : " + String.valueOf(databaseError.toException()));
                 }
             });
         }

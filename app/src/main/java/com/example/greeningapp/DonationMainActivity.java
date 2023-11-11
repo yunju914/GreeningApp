@@ -1,16 +1,20 @@
 package com.example.greeningapp;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.ImageButton;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
@@ -23,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class DonationMainActivity extends AppCompatActivity {
 
@@ -140,18 +145,22 @@ public class DonationMainActivity extends AppCompatActivity {
                 if (item.getItemId() == R.id.tab_home) {
                     // Home 액티비티로 이동
                     startActivity(new Intent(DonationMainActivity.this, MainActivity.class));
+                    finish();
                     return true;
                 } else if (item.getItemId() == R.id.tab_shopping) {
                     // Category 액티비티로 이동
                     startActivity(new Intent(DonationMainActivity.this, CategoryActivity.class));
+                    finish();
                     return true;
                 } else if (item.getItemId() == R.id.tab_donation) {
                     // Donation 액티비티로 이동
                     startActivity(new Intent(DonationMainActivity.this, DonationMainActivity.class));
+                    finish();
                     return true;
                 } else if (item.getItemId() == R.id.tab_mypage) {
                     // My Page 액티비티로 이동
                     startActivity(new Intent(DonationMainActivity.this, MyPageActivity.class));
+                    finish();
                     return true;
                 }
                 return false;

@@ -41,7 +41,6 @@ public class SearchActivity extends AppCompatActivity {
     Toolbar toolbar;
     private BottomNavigationView bottomNavigationView;
 
-    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,22 +65,18 @@ public class SearchActivity extends AppCompatActivity {
                 if (item.getItemId() == R.id.tab_home) {
                     // Home 액티비티로 이동
                     startActivity(new Intent(SearchActivity.this, MainActivity.class));
-                    finish();
                     return true;
                 } else if (item.getItemId() == R.id.tab_shopping) {
                     // Category 액티비티로 이동
                     startActivity(new Intent(SearchActivity.this, CategoryActivity.class));
-                    finish();
                     return true;
                 } else if (item.getItemId() == R.id.tab_donation) {
                     // Donation 액티비티로 이동
                     startActivity(new Intent(SearchActivity.this, DonationMainActivity.class));
-                    finish();
                     return true;
                 } else if (item.getItemId() == R.id.tab_mypage) {
                     // My Page 액티비티로 이동
                     startActivity(new Intent(SearchActivity.this, MyPageActivity.class));
-                    finish();
                     return true;
                 }
                 return false;
@@ -141,7 +136,6 @@ public class SearchActivity extends AppCompatActivity {
 
         // Firebase 데이터베이스에서 데이터를 가져와서 검색 결과를 업데이트
         databaseReference.addValueEventListener(new ValueEventListener() {
-            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 searchResults.clear(); // 검색 결과 초기화
@@ -178,7 +172,7 @@ public class SearchActivity extends AppCompatActivity {
             onBackPressed();
             return true;
         } else if (itemId == R.id.action_search) {
-            searchEditText.requestFocus(); // EditText에 포커스를 주어 클릭한 것처럼 만듭니다.
+            searchEditText.requestFocus(); // EditText에 포커스를 주어 클릭한 것처럼
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.showSoftInput(searchEditText, InputMethodManager.SHOW_IMPLICIT); // 키보드를 나타나게 합니다.
             return true;

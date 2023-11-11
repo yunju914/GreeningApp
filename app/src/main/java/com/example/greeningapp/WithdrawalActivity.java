@@ -140,7 +140,7 @@ public class WithdrawalActivity extends AppCompatActivity{
             }
         });
     }
-//
+    //
 //        AlertDialog.Builder builder = new AlertDialog.Builder(this);
 //        builder.setTitle("탈퇴 확인");
 //        builder.setMessage("정말로 이 앱을 탈퇴하시겠습니까?");

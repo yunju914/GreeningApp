@@ -4,14 +4,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 
-import androidx.annotation.NonNull;
+
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.annotation.NonNull;
+
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.greeningapp.CategoryActivity;
+import com.example.greeningapp.DonationMainActivity;
+import com.example.greeningapp.MainActivity;
+import com.example.greeningapp.MyPageActivity;
+import com.example.greeningapp.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -19,9 +29,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 
 public class OrderHistoryActivity extends AppCompatActivity {
 
@@ -83,10 +98,29 @@ public class OrderHistoryActivity extends AppCompatActivity {
                     }
                 }
 
+
+                Collections.sort(parentModelArrayList, new Comparator<MyOrder>() {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                    @Override
+                    public int compare(MyOrder myOrder1, MyOrder myOrder2) {
+                        try {
+                            Date date1 = dateFormat.parse(myOrder1.getOrderDate());
+                            Date date2 = dateFormat.parse(myOrder2.getOrderDate());
+                            return date2.compareTo(date1);
+                        } catch (Exception e) {
+                            return 0;
+                        }
+                    }
+                });
+
+
 //                ParentAdapter = new OrderHistoryParentRcyAdapter(new ArrayList<>(), OrderHistoryActivity.this);
                 ParentAdapter = new OrderHistoryParentRcyAdapter(parentModelArrayList, OrderHistoryActivity.this);
                 parentRecyclerView.setAdapter(ParentAdapter);
             }
+
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {

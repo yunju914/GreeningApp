@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -157,6 +158,7 @@ public class ChangeActivity extends AppCompatActivity {
                 public void onClick(DialogInterface dialogInterface, int i) {
                     Intent intent = new Intent(ChangeActivity.this, MyPageActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             });
             builder.show();

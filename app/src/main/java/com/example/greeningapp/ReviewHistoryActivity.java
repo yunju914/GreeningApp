@@ -1,5 +1,4 @@
 package com.example.greeningapp;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,8 +21,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import androidx.appcompat.widget.Toolbar;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 
 public class ReviewHistoryActivity extends AppCompatActivity {
 
@@ -93,6 +96,22 @@ public class ReviewHistoryActivity extends AppCompatActivity {
                                 reviewhistoryList.add(review);
                                 Log.d("usename", review.getUsername() + "가져왔음");
                             }
+
+                            Collections.sort(reviewhistoryList, new Comparator<Review>() {
+                                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                                @Override
+                                public int compare(Review review1, Review review2) {
+                                    try {
+                                        Date date1 = dateFormat.parse(review1.getRdatetime());
+                                        Date date2 = dateFormat.parse(review2.getRdatetime());
+                                        return date2.compareTo(date1);
+                                    } catch (Exception e) {
+                                        return 0;
+                                    }
+                                }
+                            });
+
                             adapter.notifyDataSetChanged();
                         }
                         @Override
@@ -120,18 +139,22 @@ public class ReviewHistoryActivity extends AppCompatActivity {
                 if (item.getItemId() == R.id.tab_home) {
                     // Home 액티비티로 이동
                     startActivity(new Intent(ReviewHistoryActivity.this, MainActivity.class));
+                    finish();
                     return true;
                 } else if (item.getItemId() == R.id.tab_shopping) {
                     // Category 액티비티로 이동
                     startActivity(new Intent(ReviewHistoryActivity.this, CategoryActivity.class));
+                    finish();
                     return true;
                 } else if (item.getItemId() == R.id.tab_donation) {
                     // Donation 액티비티로 이동
                     startActivity(new Intent(ReviewHistoryActivity.this, DonationMainActivity.class));
+                    finish();
                     return true;
                 } else if (item.getItemId() == R.id.tab_mypage) {
                     // My Page 액티비티로 이동
                     startActivity(new Intent(ReviewHistoryActivity.this, MyPageActivity.class));
+                    finish();
                     return true;
                 }
                 return false;
