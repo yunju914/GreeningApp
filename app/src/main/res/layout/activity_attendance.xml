@@ -12,8 +12,6 @@
         android:id="@+id/toolbar_attendance"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
         android:background="@color/toolbar"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme">
